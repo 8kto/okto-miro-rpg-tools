@@ -9,7 +9,7 @@ import SkeletonToken from '../images/tokens/rounded/skeleton.png'
 import ZombieToken from '../images/tokens/rounded/zombie.png'
 
 
-export default {
+const tokens ={
   CentipedeToken,
   GcubeToken,
   GhoulToken,
@@ -18,3 +18,6 @@ export default {
   SkeletonToken,
   ZombieToken,
 }
+
+export type TokenDict = typeof tokens
+export default tokens
