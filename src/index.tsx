@@ -1,101 +1,73 @@
-import '/assets/style.css';
-import {useEffect} from 'preact/compat';
-import {DropEvent} from '@mirohq/websdk-types/stable/api/ui';
-import {Image} from "@mirohq/websdk-types/stable/features/widgets/image";
+import '/assets/style.css'
 
-import {tokens} from './data/tokens'
+import { DropEvent } from '@mirohq/websdk-types/stable/api/ui'
+import { Image } from '@mirohq/websdk-types/stable/features/widgets/image'
+import { useEffect } from 'preact/compat'
 
-const {board} = miro;
+import { tokens } from './data/tokens'
+import { useSpanRowsStrategy } from './strategies'
 
-// Function to apply a circular crop effect to the selected image using a custom SVG overlay
-const convertImageToToken = async (image?: Image) => {
-  const selectedWidgets = await board.getSelection();
-  const selectedImage = image || selectedWidgets.find(widget => widget.type === 'image') as Image;
+const { board } = miro
 
-  if (!selectedImage) {
-    return;
-  }
-
-  // Get the image's dimensions and URL
-  const {x, y, alt, width} = selectedImage;
-
-  const titleText = await board.createText({
-    content: alt,
+const getTokenTitle = async ({ x, y, title }: { x: number; y: number; title: string }) => {
+  return await board.createText({
+    content: title,
     x,
-    y: y - 72, // Position the text above the image
+    y, // Position the text above the image
     style: {
       textAlign: 'center',
       fontSize: 18,
       fillColor: '#000000',
-      color: '#fff'
+      color: '#fff',
     },
-  });
+  })
+}
 
-  const buffer = []
-  for (let i = 0; i < 8; i++) {
-    const hpText = await board.createText({
-      content: "x",
-      x: x - width / 2.5 + i * 15,
-      y: y + 72, // Position the button below the image
-      width: 1,
-      style: {
-        textAlign: 'center',
-        fontSize: 14,
-        fillColor: '#000',
-        color: '#fff',
-      },
-    });
-    buffer.push(hpText)
-  }
-  await board.group({items: [selectedImage, titleText, ...buffer]});
+const convertImageToToken = async (image?: Image) => {
+  const selectedWidgets = await board.getSelection()
+  const selectedImage = image || selectedWidgets.find(widget => widget.type === 'image') as Image
 
-
-  for (let i = 0; i < 8; i++) {
-    await board.createText({
-      content: " ",
-      x: x - width / 2.5 + i * 15,
-      y: y + 72, // Position the button below the image
-      width: 1,
-      style: {
-        textAlign: 'left',
-        fontSize: 14,
-        fillColor: '#fff',
-        color: '#000',
-      },
-    });
+  if (!selectedImage) {
+    return
   }
 
+  // Get the image's dimensions and URL
+  const { alt, width, x, y } = selectedImage
+  const titleText = await getTokenTitle({ x, y: y - 72, title: alt || 'NA' })
+
+  const buffer = await useSpanRowsStrategy({ x, y, width, n: 8 })
+
+  await board.group({ items: [selectedImage, titleText, ...buffer] })
   await titleText.sync()
-};
+}
 
 // Function to handle image drop event
 const handleDropItem = async (e: DropEvent) => {
-  const {x, y, target} = e;
+  const { target, x, y } = e
 
   if (target instanceof HTMLImageElement) {
-    const image = await board.createImage({x, y, width: 128, url: target.src, title: target.title, alt: target.title});
-    await board.viewport.zoomTo(image);
+    const image = await board.createImage({ x, y, width: 128, url: target.src, title: target.title, alt: target.title })
     await convertImageToToken(image)
   }
-};
+}
 
 export default function App() {
   useEffect(() => {
     // Register the drop event handler once
-    board.ui.on('drop', handleDropItem);
+    board.ui.on('drop', handleDropItem)
 
-    void board.ui.on("icon:click", async () => {
+    void board.ui.on('icon:click', async () => {
       // In this example: when the app icon is clicked, a method opens a panel
       await miro.board.ui.openPanel({
         // The content displayed on the panel is fetched from the specified HTML resource
-        url: "/?panel=1"
-      });
-    });
+        url: '/?panel=1',
+      })
+    })
 
     // Clean up the toolbar item when the component is unmounted
     return () => {
-    };
-  }, []);
+    }
+  }, [])
 
   return (
     <div id="root">
@@ -119,5 +91,5 @@ export default function App() {
         ))}
       </div>
     </div>
-  );
+  )
 }
