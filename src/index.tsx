@@ -4,8 +4,10 @@ import { DropEvent } from '@mirohq/websdk-types/stable/api/ui'
 import { Image } from '@mirohq/websdk-types/stable/features/widgets/image'
 import { useEffect } from 'preact/compat'
 
-import { tokens } from './data/tokens'
+// import { tokens } from './data/tokens'
 import { useSpanRowsStrategy } from './strategies'
+
+import tokens from './data/tokenExports'
 
 const { board } = miro
 
@@ -78,17 +80,22 @@ export default function App() {
         </button>
       </div>
       <div className="grid-container">
-        {tokens.map((token) => (
-          <div key={token.title} className="grid-item">
-            <img
-              src={token.src}
-              draggable={false}
-              className="miro-draggable draggable-item draggable-item--image"
-              alt={token.title}
-              title={token.title}
-            />
-          </div>
-        ))}
+        {Object.entries(tokens).map(([tokenTitle, token], idx) => {
+          const title = tokenTitle.replace('Token', '');
+
+          return (
+            <div key={title} className="grid-item">
+              <img
+                src={token}
+                draggable={false}
+                className="miro-draggable draggable-item draggable-item--image"
+                alt={title}
+                title={title}
+              />
+              <span className="token-title">{title}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   )
