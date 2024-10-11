@@ -1,4 +1,5 @@
 import { GroupableItem } from '@mirohq/websdk-types/stable/features/widgets/group'
+import { getSpacing } from './utils.getSpacing'
 
 const { board } = miro
 
@@ -7,13 +8,15 @@ export const useBlocksRowStrategy = async ({
   y,
   width,
   n = 8,
+  tokenSize
 }: {
   x: number;
   y: number;
   n: number;
   width: number;
+  tokenSize: number;
 }): Promise<GroupableItem[]> => {
-  const MAGIC_BOTTOM_OFFSET = y + 72;
+  const MAGIC_BOTTOM_OFFSET = y + getSpacing(tokenSize);
   const MAGIC_LEFT_OFFSET = x - width / 2.5;
   const MAGIC_OFFSET_STEP = 15;
 
