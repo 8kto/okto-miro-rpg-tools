@@ -6,7 +6,8 @@
     "build": "preact build --no-sw --template src/index.html --dest ./dist",
     "serve:prod": "sirv build -p 3000 --cors --single",
     "serve:dev": "preact watch -p 3000 --template src/index.html",
-    "start": "preact watch -p 3000 --template src/index.html"
+    "start": "preact watch -p 3000 --template src/index.html",
+    "update-token-exports": "scripts/update-token-exports.sh"
   },
   "dependencies": {
     "preact": "^10.3.2",
