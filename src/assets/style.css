@@ -16,7 +16,46 @@ body {
   padding: var(--space-medium);
 }
 
+/* Grid container for two-column layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: var(--space-medium); /* Space between grid items */
+  align-items: start; /* Align items to the top */
+}
+
+/* Grid item styling */
+.grid-item {
+  display: flex;
+}
+
+/* Button spans full width of grid */
+.grid-full-width {
+  grid-column: span 2; /* Make the button span across both columns */
+}
+
 img {
   max-width: 100%;
   height: auto;
+}
+
+.draggable-item--image {
+  width: 100%;
+  padding: 5px;
+  border: 3px solid #fff;
+  transition: border, .2s;
+}
+
+.draggable-item--image:hover {
+  border: 3px solid #ccc;
+  cursor: pointer;
+}
+
+.mt-medium {
+  margin-top: 1rem
+}
+
+.my-medium {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
