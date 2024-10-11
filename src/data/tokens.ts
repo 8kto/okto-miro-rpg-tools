@@ -1,4 +1,4 @@
-export type Token = {
+type Token = {
   src: string
   title: string
 }
