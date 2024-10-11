@@ -1,20 +1,10 @@
-import './style.css'
-
 import { DropEvent } from '@mirohq/websdk-types/stable/api/ui'
-import { useEffect } from 'preact/compat'
+import { useCallback, useEffect, useState } from 'preact/compat'
 import { convertImageToToken } from './utils'
 import { TokenDict } from '../../data/tokenExports'
+import { DEFAULT_TOKEN_SIZE } from './consts'
 
 const { board } = miro
-
-const handleDropItem = async (e: DropEvent) => {
-  const { target, x, y } = e
-
-  if (target instanceof HTMLImageElement) {
-    const image = await board.createImage({ x, y, width: 128, url: target.src, title: target.title, alt: target.title })
-    await convertImageToToken(image)
-  }
-}
 
 const handleAppClick = async () => {
   await board.ui.openPanel({
@@ -23,15 +13,44 @@ const handleAppClick = async () => {
 }
 
 const Panel = ({ tokens }: { tokens: TokenDict }) => {
+  const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
+
+  const handleDropItem = useCallback(async (event: DropEvent) => {
+    const { target, x, y } = event
+
+    if (target instanceof HTMLImageElement) {
+      const image = await board.createImage({
+        x,
+        y,
+        width: tokenSize,
+        url: target.src,
+        title: target.title,
+        alt: target.title,
+      })
+      await convertImageToToken({ image, tokenSize })
+    }
+  }, [tokenSize])
+
   useEffect(() => {
     void board.ui.on('drop', handleDropItem)
-    void board.ui.on('icon:click', handleAppClick)
 
     return () => {
       void board.ui.off('drop', handleDropItem)
+    }
+  }, [handleDropItem])
+
+  useEffect(() => {
+    void board.ui.on('icon:click', handleAppClick)
+
+    return () => {
       void board.ui.off('icon:click', handleAppClick)
     }
   }, [])
+
+  const handleTokenSizeChange = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    setTokenSize(+target.value)
+  }
 
   return (
     <div className="space-y-1">
@@ -39,7 +58,14 @@ const Panel = ({ tokens }: { tokens: TokenDict }) => {
 
       <div className="form-group">
         <label htmlFor="token-size-input">Token size</label>
-        <input className="input input" type="text" placeholder="128" id="token-size-input" />
+        <input
+          className="input"
+          type="text"
+          placeholder={DEFAULT_TOKEN_SIZE.toString()}
+          onChange={handleTokenSizeChange}
+          value={tokenSize}
+          id="token-size-input"
+        />
       </div>
 
       <div className="form-group">
@@ -51,7 +77,7 @@ const Panel = ({ tokens }: { tokens: TokenDict }) => {
       </div>
 
       <div className="grid-full-width">
-        <button className="button button-primary w-100" onClick={() => convertImageToToken()}>
+        <button className="button button-primary w-100" onClick={() => convertImageToToken({ tokenSize })}>
           Convert selected image to token
         </button>
       </div>
