@@ -16,53 +16,6 @@ body {
   padding: var(--space-medium);
 }
 
-/* Grid container for two-column layout */
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  gap: var(--space-medium); /* Space between grid items */
-  align-items: start; /* Align items to the top */
-}
-
-/* Grid item styling */
-.grid-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content horizontally */
-}
-
-/* Style for the token images */
-.draggable-item--image {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: var(--space-small); /* Space between image and title */
-  border: 3px solid #fff;
-  transition: border, .2s;
-}
-
-/* Style for the token title */
-.token-title {
-  text-align: center;
-  font-size: 14px;
-  color: #333;
-}
-
-/* Button spans full width of grid */
-.grid-full-width {
-  grid-column: span 2; /* Make the button span across both columns */
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-
-.draggable-item--image:hover {
-  border: 3px solid #ccc;
-  cursor: pointer;
-}
-
 .mt-medium {
   margin-top: 1rem
 }
@@ -72,3 +25,16 @@ img {
   margin-bottom: 1rem;
 }
 
+.space-y-1 > * {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.w-100 {
+  width: 100%;
+  min-width: 100%;
+}
+
+.section-header {
+  margin-top: 3rem;
+}
