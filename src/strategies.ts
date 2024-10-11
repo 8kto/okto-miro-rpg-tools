@@ -2,7 +2,7 @@ import { GroupableItem } from '@mirohq/websdk-types/stable/features/widgets/grou
 
 const { board } = miro
 
-export const useSpanRowsStrategy = async ({
+export const useBlocksRowStrategy = async ({
   x,
   y,
   width,
@@ -50,10 +50,10 @@ export const useSpanRowsStrategy = async ({
   );
 
   // Execute all promises in parallel and wait for completion
-  const [hpTexts] = await Promise.all([
+  const [hpTexts, spaceTexts] = await Promise.all([
     Promise.all(hpTextPromises),
     Promise.all(spaceTextPromises),
   ]);
 
-  return hpTexts;
+  return hpTexts.concat(spaceTexts);
 };
