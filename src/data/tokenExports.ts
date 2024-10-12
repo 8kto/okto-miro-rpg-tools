@@ -8,7 +8,7 @@ import RatToken from "../images/tokens/rounded/rat.png"
 import SkeletonToken from "../images/tokens/rounded/skeleton.png"
 import ZombieToken from "../images/tokens/rounded/zombie.png"
 
-export default {
+const tokens = {
   CentipedeToken,
   GelatinousCubeToken,
   GhoulToken,
@@ -17,3 +17,7 @@ export default {
   SkeletonToken,
   ZombieToken,
 }
+
+export default tokens
+
+export type TokenDict = typeof tokens
