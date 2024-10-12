@@ -5,6 +5,7 @@ import { DEFAULT_STRATEGY_ID, DEFAULT_TOKEN_SIZE } from "./consts"
 import TokenGallery from "../TokenGallery/TokenGallery"
 import { DropEvent } from "@mirohq/websdk-types/stable/api/ui"
 import strategiesMap, { StrategyId } from "./strategies"
+import About from "../About/About"
 
 const { board } = miro
 
@@ -107,6 +108,11 @@ const Panel = (_props: PanelProps) => {
             </p>
           </div>
         </div>
+      </details>
+
+      <details>
+        <summary className="h3 accordion-item">About</summary>
+        <About />
       </details>
 
       <div className="grid-full-width">
