@@ -40,7 +40,7 @@ const Panel = (_props: PanelProps) => {
         })
       }
     },
-    [tokenSize],
+    [tokenSize, selectedStrategyId],
   )
 
   useEffect(() => {
