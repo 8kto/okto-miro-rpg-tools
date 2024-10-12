@@ -36,6 +36,7 @@ export const getTokenTitle = async ({
 
 export const convertImageToToken = async (options?: { image?: Image; tokenSize: number; strategy: StrategyDef }) => {
   const { board } = miro
+  const tokensStorage = board.storage.collection("tokens")
   const { image, tokenSize = DEFAULT_TOKEN_SIZE, strategy } = options || {}
 
   if (!strategy) {
@@ -50,11 +51,24 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
   }
 
   // Get the image's dimensions and URL
-  const { alt, width, x, y } = selectedImage
+  const { width, x, y } = selectedImage
+  let { title } = selectedImage
+
+  if (title) {
+    let counter = await tokensStorage.get<number>(title)
+    if (!counter) counter = 0
+    void tokensStorage.set(title, ++counter)
+
+    title = `${selectedImage.title} (${counter})`
+    selectedImage.title = title
+    selectedImage.alt = title
+    void selectedImage.sync()
+  }
+
   const titleText = await getTokenTitle({
     x,
-    y: y - tokenSize / 2 - 10, // + getSpacing(tokenSize),
-    title: alt || "NA",
+    y: y - tokenSize / 2 - 10,
+    title: title || "NA",
     tokenSize,
   })
 
