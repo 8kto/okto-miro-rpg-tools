@@ -1,6 +1,6 @@
 import { useState } from "preact/compat"
 
-const Input = ({ handleInputChange }: { handleInputChange: (e: string) => void }) => {
+const SearchInput = ({ handleInputChange }: { handleInputChange: (e: string) => void }) => {
   const [internalInputValue, setInternalInputValue] = useState("")
 
   return (
@@ -9,7 +9,7 @@ const Input = ({ handleInputChange }: { handleInputChange: (e: string) => void }
         <input
           className="input input-small"
           type="text"
-          placeholder="Search assets"
+          placeholder="Filter"
           onChange={(e) => {
             const target = e.target as HTMLInputElement
 
@@ -23,4 +23,4 @@ const Input = ({ handleInputChange }: { handleInputChange: (e: string) => void }
   )
 }
 
-export default Input
+export default SearchInput
