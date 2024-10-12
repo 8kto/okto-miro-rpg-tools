@@ -1,15 +1,16 @@
-import { DropEvent } from '@mirohq/websdk-types/stable/api/ui'
-import { useCallback, useEffect, useState } from 'preact/compat'
-import { convertImageToToken } from './utils'
-import tokens from '../../data/tokenExports'
-import { DEFAULT_TOKEN_SIZE } from './consts'
-import PanelGallery from '../TokenGallery/PanelGallery'
+import { useCallback, useEffect, useState } from "preact/compat"
+import { convertImageToToken } from "./utils"
+import tokens from "../../data/tokenExports"
+import { DEFAULT_STRATEGY_ID, DEFAULT_TOKEN_SIZE } from "./consts"
+import PanelGallery from "../TokenGallery/PanelGallery"
+import { DropEvent } from "@mirohq/websdk-types/stable/api/ui"
+import strategiesMap, { StrategyId } from "./strategies"
 
 const { board } = miro
 
 const handleAppClick = async () => {
   await board.ui.openPanel({
-    url: '/?panel=1',
+    url: "/?panel=1",
   })
 }
 
@@ -17,36 +18,45 @@ type PanelProps = {}
 
 const Panel = (_props: PanelProps) => {
   const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
+  const [selectedStrategyId, setSelectedStrategyId] =
+    useState<StrategyId>(DEFAULT_STRATEGY_ID)
 
-  const handleDropItem = useCallback(async (event: DropEvent) => {
-    const { target, x, y } = event
+  const handleDropItem = useCallback(
+    async (event: DropEvent) => {
+      const { target, x, y } = event
 
-    if (target instanceof HTMLImageElement) {
-      const image = await board.createImage({
-        x,
-        y,
-        width: tokenSize,
-        url: target.src,
-        title: target.title,
-        alt: target.title,
-      })
-      await convertImageToToken({ image, tokenSize })
-    }
-  }, [tokenSize])
+      if (target instanceof HTMLImageElement) {
+        const image = await board.createImage({
+          x,
+          y,
+          width: tokenSize,
+          url: target.src,
+          title: target.title,
+          alt: target.title,
+        })
+        await convertImageToToken({
+          image,
+          tokenSize,
+          strategy: strategiesMap[selectedStrategyId],
+        })
+      }
+    },
+    [tokenSize],
+  )
 
   useEffect(() => {
-    void board.ui.on('drop', handleDropItem)
+    void board.ui.on("drop", handleDropItem)
 
     return () => {
-      void board.ui.off('drop', handleDropItem)
+      void board.ui.off("drop", handleDropItem)
     }
   }, [handleDropItem])
 
   useEffect(() => {
-    void board.ui.on('icon:click', handleAppClick)
+    void board.ui.on("icon:click", handleAppClick)
 
     return () => {
-      void board.ui.off('icon:click', handleAppClick)
+      void board.ui.off("icon:click", handleAppClick)
     }
   }, [])
 
@@ -55,15 +65,25 @@ const Panel = (_props: PanelProps) => {
     setTokenSize(+target.value)
   }
 
+  const handleStrategyChange = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    if (target.value in strategiesMap) {
+      setSelectedStrategyId(target.value as StrategyId)
+    }
+  }
+
   return (
     <div className="space-y-1">
-      <p className="my-medium">Drag and drop token or convert existing images on the board.</p>
+      <p className="my-medium">
+        Drag and drop token or convert existing images on the board.
+      </p>
 
       <div className="form-group">
         <label htmlFor="token-size-input">Token size</label>
         <input
           className="input"
-          type="text"
+          type="number"
+          step="10"
           placeholder={DEFAULT_TOKEN_SIZE.toString()}
           onChange={handleTokenSizeChange}
           value={tokenSize}
@@ -73,14 +93,29 @@ const Panel = (_props: PanelProps) => {
 
       <div className="form-group">
         <label htmlFor="select-1">Strategy</label>
-        <select className="select" id="select-1">
-          <option value="useBlocksRowStrategy">Blocks row</option>
-          <option value="useDamageNumberStrategy">Damage numbers</option>
+        <select
+          className="select"
+          id="select-1"
+          onChange={handleStrategyChange}
+        >
+          {Object.values(strategiesMap).map(({ name, id }) => (
+            <option key={id} value={id} selected={id === selectedStrategyId}>
+              {name}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="grid-full-width">
-        <button className="button button-primary w-100" onClick={() => convertImageToToken({ tokenSize })}>
+        <button
+          className="button button-primary w-100"
+          onClick={() =>
+            convertImageToToken({
+              tokenSize,
+              strategy: strategiesMap[selectedStrategyId],
+            })
+          }
+        >
           Convert selected image to token
         </button>
       </div>
