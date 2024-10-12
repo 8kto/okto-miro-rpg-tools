@@ -1,5 +1,4 @@
 import { GroupableItem } from "@mirohq/websdk-types/stable/features/widgets/group"
-import { getSpacing } from "../utils.getSpacing"
 import { StrategyProps } from "./index"
 import { getTitleFontSize } from "../utils"
 
@@ -17,7 +16,7 @@ export const useDamageNumberStrategy = async ({ x, y, tokenSize }: StrategyProps
     return board.createText({
       content: `Damage: ${damage === 0 ? "" : `-`}${damage}`,
       x,
-      y: y + getSpacing(tokenSize),
+      y: y + tokenSize /2 + 10,
       style: {
         textAlign: "center",
         fontSize: getTitleFontSize(tokenSize),

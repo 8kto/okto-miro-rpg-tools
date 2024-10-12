@@ -1,6 +1,6 @@
 import { Image } from "@mirohq/websdk-types/stable/features/widgets/image"
 import { DEFAULT_TITLE_FONT_SIZE, DEFAULT_TOKEN_SIZE } from "./consts"
-import { getSpacing } from "./utils.getSpacing"
+//import { getSpacing } from "./utils.getSpacing"
 import { StrategyDef } from "./strategies"
 
 const { board } = miro
@@ -52,7 +52,7 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
   const { alt, width, x, y } = selectedImage
   const titleText = await getTokenTitle({
     x,
-    y: y - getSpacing(tokenSize),
+    y: y - tokenSize / 2 - 10,// + getSpacing(tokenSize),
     title: alt || "NA",
     tokenSize,
   })
@@ -66,8 +66,10 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
 export const formatTokenTitle = (tokenTitle: string): string => {
   const withoutToken = tokenTitle.replace("Token", "")
 
+  const fixedDashes = withoutToken.replaceAll('_', '')
+
   // Split the camelCase into separate words
-  const splitWords = withoutToken.replace(/([a-z])([A-Z])/g, "$1 $2")
+  const splitWords = fixedDashes.replace(/([a-z])([A-Z])/g, "$1 $2")
 
   // Capitalize the first letter of each word
   const formattedTitle = splitWords.replace(/\b\w/g, (char) => char.toUpperCase())
