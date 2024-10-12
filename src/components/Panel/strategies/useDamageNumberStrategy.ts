@@ -2,8 +2,6 @@ import { GroupableItem } from "@mirohq/websdk-types/stable/features/widgets/grou
 import { StrategyProps } from "./index"
 import { getTitleFontSize } from "../utils"
 
-const { board } = miro
-
 const MAX_HP = 18
 
 /**
@@ -11,6 +9,7 @@ const MAX_HP = 18
  * So that HPs can be tracked just by a removing the topmost
  */
 export const useDamageNumberStrategy = async ({ x, y, tokenSize }: StrategyProps): Promise<GroupableItem[]> => {
+  const { board } = miro
   const hpTextPromises = Array.from({ length: MAX_HP }, (_, i) => {
     const damage = MAX_HP - i - 1
     return board.createText({
