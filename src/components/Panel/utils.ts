@@ -34,11 +34,7 @@ export const getTokenTitle = async ({
   })
 }
 
-export const convertImageToToken = async (options?: {
-  image?: Image
-  tokenSize: number
-  strategy: StrategyDef
-}) => {
+export const convertImageToToken = async (options?: { image?: Image; tokenSize: number; strategy: StrategyDef }) => {
   const { image, tokenSize = DEFAULT_TOKEN_SIZE, strategy } = options || {}
 
   if (!strategy) {
@@ -46,9 +42,7 @@ export const convertImageToToken = async (options?: {
   }
 
   const selectedWidgets = await board.getSelection()
-  const selectedImage =
-    image ||
-    (selectedWidgets.find((widget) => widget.type === "image") as Image)
+  const selectedImage = image || (selectedWidgets.find((widget) => widget.type === "image") as Image)
 
   if (!selectedImage) {
     return
