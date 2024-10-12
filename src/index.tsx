@@ -1,11 +1,10 @@
 import '/assets/style.css'
-import tokens from './data/tokenExports'
-import Panel from './components/panel/Panel'
+import Panel from './components/Panel/Panel'
 
 export default function App() {
   return (
     <div id="root">
-      <Panel tokens={tokens} />
+      <Panel />
     </div>
   )
 }
