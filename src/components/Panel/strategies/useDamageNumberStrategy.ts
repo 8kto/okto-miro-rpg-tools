@@ -16,7 +16,7 @@ export const useDamageNumberStrategy = async ({ x, y, tokenSize }: StrategyProps
     return board.createText({
       content: `Damage: ${damage === 0 ? "" : `-`}${damage}`,
       x,
-      y: y + tokenSize /2 + 10,
+      y: y + tokenSize / 2 + 10,
       style: {
         textAlign: "center",
         fontSize: getTitleFontSize(tokenSize),
