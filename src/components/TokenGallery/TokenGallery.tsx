@@ -1,13 +1,16 @@
 import { TokenDict } from "../../data/tokenExports"
 import { formatTokenTitle } from "../Panel/utils"
 
-type PanelGallery = {
+type TokenGalleryProps = {
   tokens: TokenDict
 }
-const PanelGallery = ({ tokens }: PanelGallery) => {
+const TokenGallery = ({ tokens }: TokenGalleryProps) => {
   return (
     <>
       <h3 className="h2 section-header">Token gallery</h3>
+      <p className="p">
+        Tokens used: Devin Night (immortalnights.com), VTT Token Maker (thefatefulforce.com)
+      </p>
       <div className="grid-container">
         {Object.entries(tokens).map(([tokenTitle, token]) => {
           const title = formatTokenTitle(tokenTitle)
@@ -30,4 +33,4 @@ const PanelGallery = ({ tokens }: PanelGallery) => {
   )
 }
 
-export default PanelGallery
+export default TokenGallery

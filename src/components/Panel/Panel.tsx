@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "preact/compat"
 import { convertImageToToken } from "./utils"
 import tokens from "../../data/tokenExports"
 import { DEFAULT_STRATEGY_ID, DEFAULT_TOKEN_SIZE } from "./consts"
-import PanelGallery from "../TokenGallery/PanelGallery"
+import TokenGallery from "../TokenGallery/TokenGallery"
 import { DropEvent } from "@mirohq/websdk-types/stable/api/ui"
 import strategiesMap, { StrategyId } from "./strategies"
 
@@ -117,7 +117,7 @@ const Panel = (_props: PanelProps) => {
         </button>
       </div>
 
-      <PanelGallery tokens={tokens} />
+      <TokenGallery tokens={tokens} />
     </div>
   )
 }
