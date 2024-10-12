@@ -62,3 +62,15 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
   await board.group({ items: [selectedImage, titleText, ...buffer] })
   await titleText.sync()
 }
+
+export const formatTokenTitle = (tokenTitle: string): string => {
+  const withoutToken = tokenTitle.replace("Token", "")
+
+  // Split the camelCase into separate words
+  const splitWords = withoutToken.replace(/([a-z])([A-Z])/g, "$1 $2")
+
+  // Capitalize the first letter of each word
+  const formattedTitle = splitWords.replace(/\b\w/g, (char) => char.toUpperCase())
+
+  return formattedTitle
+}

@@ -1,4 +1,5 @@
 import { TokenDict } from "../../data/tokenExports"
+import { formatTokenTitle } from "../Panel/utils"
 
 type PanelGallery = {
   tokens: TokenDict
@@ -9,7 +10,7 @@ const PanelGallery = ({ tokens }: PanelGallery) => {
       <h3 className="h2 section-header">Token gallery</h3>
       <div className="grid-container">
         {Object.entries(tokens).map(([tokenTitle, token]) => {
-          const title = tokenTitle.replace("Token", "")
+          const title = formatTokenTitle(tokenTitle)
 
           return (
             <div key={title} className="grid-item">
