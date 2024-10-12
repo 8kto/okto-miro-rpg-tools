@@ -52,7 +52,7 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
   const { alt, width, x, y } = selectedImage
   const titleText = await getTokenTitle({
     x,
-    y: y - tokenSize / 2 - 10,// + getSpacing(tokenSize),
+    y: y - tokenSize / 2 - 10, // + getSpacing(tokenSize),
     title: alt || "NA",
     tokenSize,
   })
@@ -66,7 +66,7 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
 export const formatTokenTitle = (tokenTitle: string): string => {
   const withoutToken = tokenTitle.replace("Token", "")
 
-  const fixedDashes = withoutToken.replaceAll('_', '')
+  const fixedDashes = withoutToken.replaceAll("_", "")
 
   // Split the camelCase into separate words
   const splitWords = fixedDashes.replace(/([a-z])([A-Z])/g, "$1 $2")
