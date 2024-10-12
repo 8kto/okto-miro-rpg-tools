@@ -11,30 +11,36 @@ OUTPUT_FILE="src/data/tokenExports.ts"
 echo "// Auto-generated token exports" > "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
-# Loop over each image file in the directory and generate import statements
-for file in "$TOKEN_DIR"/*; do
+# Function to convert filenames to PascalCase and append 'Token'
+toPascalCase() {
+  echo "$1" | sed -r 's/(^|-|_)([a-z])/\U\2/g' | sed 's/\.png//g' | sed 's/^/Token/'
+}
+
+# Loop over each image file and folder within the TOKEN_DIR (1 level deep)
+find "$TOKEN_DIR" -mindepth 1 -maxdepth 2 -type f -name "*.png" | while read -r file; do
     # Extract the base filename without extension
     filename=$(basename -- "$file")
     name="${filename%.*}"
 
     # Convert the name to PascalCase for the import variable
-    exportName="$(echo "$name" | sed -r 's/(^|-)([a-z])/\U\2/g')Token"
+    exportName="$(toPascalCase "$name")"
 
     # Write the import statement to the output file
-    echo "import $exportName from '../images/tokens/rounded/$filename'" >> "$OUTPUT_FILE"
+    relative_path=$(realpath --relative-to="src/data" "$file")
+    echo "import $exportName from '$relative_path'" >> "$OUTPUT_FILE"
 done
 
 # Add a newline before the export default
 echo -e "\nconst tokens = {" >> "$OUTPUT_FILE"
 
 # Loop again to generate the export object entries
-for file in "$TOKEN_DIR"/*; do
+find "$TOKEN_DIR" -mindepth 1 -maxdepth 2 -type f -name "*.png" | while read -r file; do
     # Extract the base filename without extension
     filename=$(basename -- "$file")
     name="${filename%.*}"
 
     # Convert the name to PascalCase for the export variable
-    exportName="$(echo "$name" | sed -r 's/(^|-)([a-z])/\U\2/g')Token"
+    exportName="$(toPascalCase "$name")"
 
     # Write the export object entry to the output file
     echo "  $exportName," >> "$OUTPUT_FILE"
