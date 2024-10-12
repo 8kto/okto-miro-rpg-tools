@@ -25,7 +25,7 @@ for file in "$TOKEN_DIR"/*; do
 done
 
 # Add a newline before the export default
-echo -e "\n\nexport default {" >> "$OUTPUT_FILE"
+echo -e "\nconst tokens = {" >> "$OUTPUT_FILE"
 
 # Loop again to generate the export object entries
 for file in "$TOKEN_DIR"/*; do
@@ -42,5 +42,7 @@ done
 
 # Close the export default object
 echo "}" >> "$OUTPUT_FILE"
+echo -e "\nexport default tokens" >> "$OUTPUT_FILE"
+echo -e "\nexport type TokenDict = typeof tokens" >> "$OUTPUT_FILE"
 
 echo "Exports have been written to $OUTPUT_FILE"
