@@ -89,7 +89,7 @@ const Panel = (_props: PanelProps) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="select-1">Strategy</label>
+        <label htmlFor="select-1">Hit points tracking strategy</label>
         <select className="select" id="select-1" onChange={handleStrategyChange}>
           {Object.values(strategiesMap).map(({ name, id }) => (
             <option key={id} value={id} selected={id === selectedStrategyId}>
@@ -97,6 +97,10 @@ const Panel = (_props: PanelProps) => {
             </option>
           ))}
         </select>
+        <p>
+          {" "}
+          <span class="label label-info">INFO</span> {strategiesMap[selectedStrategyId].details}
+        </p>
       </div>
 
       <div className="grid-full-width">
