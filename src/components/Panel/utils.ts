@@ -3,8 +3,6 @@ import { DEFAULT_TITLE_FONT_SIZE, DEFAULT_TOKEN_SIZE } from "./consts"
 //import { getSpacing } from "./utils.getSpacing"
 import { StrategyDef } from "./strategies"
 
-const { board } = miro
-
 export const getTitleFontSize = (input: number): number => {
   const ratio = DEFAULT_TITLE_FONT_SIZE / DEFAULT_TOKEN_SIZE
   return Math.round(input * ratio)
@@ -21,6 +19,8 @@ export const getTokenTitle = async ({
   title: string
   tokenSize: number
 }) => {
+  const { board } = miro
+
   return await board.createText({
     content: title,
     x,
@@ -35,6 +35,7 @@ export const getTokenTitle = async ({
 }
 
 export const convertImageToToken = async (options?: { image?: Image; tokenSize: number; strategy: StrategyDef }) => {
+  const { board } = miro
   const { image, tokenSize = DEFAULT_TOKEN_SIZE, strategy } = options || {}
 
   if (!strategy) {

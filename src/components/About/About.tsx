@@ -1,18 +1,28 @@
 const About = () => (
-
   <>
     <p>
-      <a property="dct:title" target="_blank" rel="cc:attributionURL" href="https://github.com/8kto/okto-miro-rpg-tools">
+      <a
+        property="dct:title"
+        target="_blank"
+        rel="cc:attributionURL"
+        href="https://github.com/8kto/okto-miro-rpg-tools"
+      >
         Okto Miro RPG Tools
       </a>{" "}
       by{" "}
-      <a target="_blank" rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/8kto">
+      <a
+        target="_blank"
+        rel="cc:attributionURL dct:creator"
+        property="cc:attributionName"
+        href="https://github.com/8kto"
+      >
         undefined / 8kto
-      </a> (<a target="_blank" rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://ivlev.blog">
-      webpage
-    </a>)
-      {" "}
-      is licensed under{" "}
+      </a>{" "}
+      (
+      <a target="_blank" rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://ivlev.blog">
+        webpage
+      </a>
+      ) is licensed under{" "}
       <a
         href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
         target="_blank"

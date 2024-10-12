@@ -2,8 +2,6 @@ import { GroupableItem } from "@mirohq/websdk-types/stable/features/widgets/grou
 import { getSpacing } from "../utils.getSpacing"
 import { StrategyProps } from "./index"
 
-const { board } = miro
-
 export const useBlocksRowStrategy = async ({
   x,
   y,
@@ -15,6 +13,7 @@ export const useBlocksRowStrategy = async ({
   const MAGIC_LEFT_OFFSET = x - width / 2.5
   const MAGIC_OFFSET_STEP = 15
 
+  const { board } = miro
   const hpTextPromises = Array.from({ length: n }, (_, i) =>
     board.createText({
       content: "x",

@@ -7,10 +7,8 @@ import { DropEvent } from "@mirohq/websdk-types/stable/api/ui"
 import strategiesMap, { StrategyId } from "./strategies"
 import About from "../About/About"
 
-const { board } = miro
-
 const handleAppClick = async () => {
-  await board.ui.openPanel({
+  await miro.board.ui.openPanel({
     url: "/?panel=1",
   })
 }
@@ -18,6 +16,7 @@ const handleAppClick = async () => {
 type PanelProps = {}
 
 const Panel = (_props: PanelProps) => {
+  const { board } = miro
   const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
   const [selectedStrategyId, setSelectedStrategyId] = useState<StrategyId>(DEFAULT_STRATEGY_ID)
 
