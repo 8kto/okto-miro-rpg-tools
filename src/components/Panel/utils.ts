@@ -5,7 +5,7 @@ import { StrategyDef } from "./strategies"
 
 const { board } = miro
 
-const getTitleFontSize = (input: number): number => {
+export const getTitleFontSize = (input: number): number => {
   const ratio = DEFAULT_TITLE_FONT_SIZE / DEFAULT_TOKEN_SIZE
   return Math.round(input * ratio)
 }
