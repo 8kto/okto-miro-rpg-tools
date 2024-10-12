@@ -1,5 +1,5 @@
 import { GroupableItem } from '@mirohq/websdk-types/stable/features/widgets/group'
-import { getSpacing } from './utils.getSpacing'
+import { getSpacing } from '../utils.getSpacing'
 
 const { board } = miro
 
