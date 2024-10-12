@@ -1,6 +1,7 @@
 import { useBlocksRowStrategy } from "./useBlocksRowStrategy"
 import { DEFAULT_STRATEGY_ID } from "../consts"
 import { GroupableItem } from "@mirohq/websdk-types/stable/features/widgets/group"
+import { useDamageNumberStrategy } from "./useDamageNumberStrategy"
 
 export type StrategyProps = {
   x: number
@@ -24,7 +25,7 @@ const strategiesMap = {
     id: "useBlocksRowStrategy",
   } as StrategyDef,
   useDamageNumberStrategy: {
-    run: useBlocksRowStrategy,
+    run: useDamageNumberStrategy,
     name: "Damage numbers",
     id: "useDamageNumberStrategy",
   } as StrategyDef,
