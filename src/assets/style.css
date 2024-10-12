@@ -1,4 +1,4 @@
-@import 'mirotone/dist/styles.css';
+@import "mirotone/dist/styles.css";
 
 *,
 *:before,
@@ -17,7 +17,7 @@ body {
 }
 
 .mt-medium {
-  margin-top: 1rem
+  margin-top: 1rem;
 }
 
 .my-medium {
@@ -47,8 +47,6 @@ body {
   align-items: start; /* Align items to the top */
 }
 
-
-
 /* Grid item styling */
 .grid-item {
   display: flex;
@@ -62,7 +60,7 @@ body {
   height: auto;
   margin-bottom: var(--space-small); /* Space between image and title */
   border: 3px solid #fff;
-  transition: border, .2s;
+  transition: border, 0.2s;
 }
 
 /* Style for the token title */
