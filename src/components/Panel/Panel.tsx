@@ -1,8 +1,9 @@
 import { DropEvent } from '@mirohq/websdk-types/stable/api/ui'
 import { useCallback, useEffect, useState } from 'preact/compat'
 import { convertImageToToken } from './utils'
-import { TokenDict } from '../../data/tokenExports'
+import tokens from '../../data/tokenExports'
 import { DEFAULT_TOKEN_SIZE } from './consts'
+import PanelGallery from '../TokenGallery/PanelGallery'
 
 const { board } = miro
 
@@ -12,7 +13,9 @@ const handleAppClick = async () => {
   })
 }
 
-const Panel = ({ tokens }: { tokens: TokenDict }) => {
+type PanelProps = {}
+
+const Panel = (_props: PanelProps) => {
   const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
 
   const handleDropItem = useCallback(async (event: DropEvent) => {
@@ -82,25 +85,7 @@ const Panel = ({ tokens }: { tokens: TokenDict }) => {
         </button>
       </div>
 
-      <h3 className="section-header">Tokens gallery</h3>
-      <div className="grid-container">
-        {Object.entries(tokens).map(([tokenTitle, token]) => {
-          const title = tokenTitle.replace('Token', '')
-
-          return (
-            <div key={title} className="grid-item">
-              <img
-                src={token}
-                draggable={false}
-                className="miro-draggable draggable-item draggable-item--image"
-                alt={title}
-                title={title}
-              />
-              <span className="token-title">{title}</span>
-            </div>
-          )
-        })}
-      </div>
+      <PanelGallery tokens={tokens} />
     </div>
   )
 }
