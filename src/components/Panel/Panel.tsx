@@ -18,8 +18,7 @@ type PanelProps = {}
 
 const Panel = (_props: PanelProps) => {
   const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
-  const [selectedStrategyId, setSelectedStrategyId] =
-    useState<StrategyId>(DEFAULT_STRATEGY_ID)
+  const [selectedStrategyId, setSelectedStrategyId] = useState<StrategyId>(DEFAULT_STRATEGY_ID)
 
   const handleDropItem = useCallback(
     async (event: DropEvent) => {
@@ -74,9 +73,7 @@ const Panel = (_props: PanelProps) => {
 
   return (
     <div className="space-y-1">
-      <p className="my-medium">
-        Drag and drop token or convert existing images on the board.
-      </p>
+      <p className="my-medium">Drag and drop token or convert existing images on the board.</p>
 
       <div className="form-group">
         <label htmlFor="token-size-input">Token size</label>
@@ -93,11 +90,7 @@ const Panel = (_props: PanelProps) => {
 
       <div className="form-group">
         <label htmlFor="select-1">Strategy</label>
-        <select
-          className="select"
-          id="select-1"
-          onChange={handleStrategyChange}
-        >
+        <select className="select" id="select-1" onChange={handleStrategyChange}>
           {Object.values(strategiesMap).map(({ name, id }) => (
             <option key={id} value={id} selected={id === selectedStrategyId}>
               {name}
