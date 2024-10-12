@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "preact build --no-sw --template src/index.html --dest ./dist",
-    "serve:prod": "sirv build -p 3000 --cors --single",
+    "build": "preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
+    "serve:prod": "sirv dist -p 3000 --cors --single --host 0.0.0.0",
     "serve:dev": "preact watch -p 3000 --template src/index.html",
     "dev": "preact watch -p 3000 --template src/index.html",
     "update-token-exports": "scripts/update-token-exports.sh",
