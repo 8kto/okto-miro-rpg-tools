@@ -87,7 +87,7 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
             const tokenSrc = loadedTokens[tokenTitle]
 
             return (
-              <div key={title} className="grid-item">
+              <div key={tokenTitle} className="grid-item">
                 {tokenSrc ? (
                   <img
                     src={tokenSrc}
