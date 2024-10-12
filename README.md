@@ -49,3 +49,7 @@ For full license details, see the [LICENSE.md](./LICENSE.md) file.
 ## Contribution
 
 Contributions are welcome! Please feel free to submit pull requests, open issues, or suggest features.
+
+## TODO
+- Increment token titles
+- Dice rolls
