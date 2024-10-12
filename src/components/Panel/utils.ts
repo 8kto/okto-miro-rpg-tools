@@ -65,15 +65,15 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
 }
 
 export const formatTokenTitle = (tokenTitle: string): string => {
-  const withoutToken = tokenTitle.replace("Token", "")
-
-  const fixedDashes = withoutToken.replaceAll("_", "")
-
-  // Split the camelCase into separate words
-  const splitWords = fixedDashes.replace(/([a-z])([A-Z])/g, "$1 $2")
-
-  // Capitalize the first letter of each word
-  const formattedTitle = splitWords.replace(/\b\w/g, (char) => char.toUpperCase())
-
-  return formattedTitle
+  return (
+    tokenTitle
+      .replace("Token", "")
+      .replaceAll("_", "")
+      .replaceAll("-", "")
+      .replace(/\d+$/, "")
+      // Split the camelCase into separate words
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      // Capitalize the first letter of each word
+      .replace(/\b\w/g, (char) => char.toUpperCase())
+  )
 }
