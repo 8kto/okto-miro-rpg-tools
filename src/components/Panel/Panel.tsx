@@ -75,33 +75,39 @@ const Panel = (_props: PanelProps) => {
     <div className="space-y-1">
       <p className="my-medium">Drag and drop token or convert existing images on the board.</p>
 
-      <div className="form-group">
-        <label htmlFor="token-size-input">Token size</label>
-        <input
-          className="input"
-          type="number"
-          step="10"
-          placeholder={DEFAULT_TOKEN_SIZE.toString()}
-          onChange={handleTokenSizeChange}
-          value={tokenSize}
-          id="token-size-input"
-        />
-      </div>
+      <details>
+        <summary className="h3 accordion-item">Settings</summary>
 
-      <div className="form-group">
-        <label htmlFor="select-1">Hit points tracking strategy</label>
-        <select className="select" id="select-1" onChange={handleStrategyChange}>
-          {Object.values(strategiesMap).map(({ name, id }) => (
-            <option key={id} value={id} selected={id === selectedStrategyId}>
-              {name}
-            </option>
-          ))}
-        </select>
-        <p>
-          {" "}
-          <span class="label label-info">INFO</span> {strategiesMap[selectedStrategyId].details}
-        </p>
-      </div>
+        <div className="app-card py-medium">
+          <div className="form-group">
+            <label htmlFor="token-size-input">Token size</label>
+            <input
+              className="input"
+              type="number"
+              step="10"
+              placeholder={DEFAULT_TOKEN_SIZE.toString()}
+              onChange={handleTokenSizeChange}
+              value={tokenSize}
+              id="token-size-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="select-1">Hit points tracking strategy</label>
+            <select className="select" id="select-1" onChange={handleStrategyChange}>
+              {Object.values(strategiesMap).map(({ name, id }) => (
+                <option key={id} value={id} selected={id === selectedStrategyId}>
+                  {name}
+                </option>
+              ))}
+            </select>
+            <p>
+              {" "}
+              <span class="label label-info">INFO</span> {strategiesMap[selectedStrategyId].details}
+            </p>
+          </div>
+        </div>
+      </details>
 
       <div className="grid-full-width">
         <button

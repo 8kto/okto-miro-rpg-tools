@@ -25,6 +25,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.py-medium {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .space-y-1 > * {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -83,4 +88,9 @@ img {
 .draggable-item--image:hover {
   border: 3px solid #ccc;
   cursor: pointer;
+}
+
+.accordion-item:hover {
+  cursor: pointer;
+  user-select: none;
 }
