@@ -12,27 +12,27 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
   return (
     <>
       <h3 className="h2 section-header">Token gallery</h3>
-      <SearchInput handleInputChange={(value) => setSearchInputValue(value)} />
       <p className="p">Tokens used: Devin Night (immortalnights.com), VTT Token Maker (thefatefulforce.com)</p>
+      <SearchInput handleInputChange={(value) => setSearchInputValue(value)} />
       <div className="grid-container">
         {Object.entries(tokens)
-          .filter(([tokenTitle]) => tokenTitle.toLowerCase().includes(searchInputValue.toLowerCase()))
-          .map(([tokenTitle, token]) => {
-            const title = formatTokenTitle(tokenTitle)
+        .filter(([tokenTitle]) => tokenTitle.toLowerCase().includes(searchInputValue.toLowerCase()))
+        .map(([tokenTitle, token]) => {
+          const title = formatTokenTitle(tokenTitle)
 
-            return (
-              <div key={title} className="grid-item">
-                <img
-                  src={token}
-                  draggable={false}
-                  className="miro-draggable draggable-item draggable-item--image"
-                  alt={title}
-                  title={title}
-                />
-                <span className="token-title">{title}</span>
-              </div>
-            )
-          })}
+          return (
+            <div key={title} className="grid-item">
+              <img
+                src={token}
+                draggable={false}
+                className="miro-draggable draggable-item draggable-item--image"
+                alt={title}
+                title={title}
+              />
+              <span className="token-title">{title}</span>
+            </div>
+          )
+        })}
       </div>
     </>
   )
