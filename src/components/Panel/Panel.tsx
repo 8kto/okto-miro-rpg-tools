@@ -8,6 +8,7 @@ import strategiesMap, { StrategyId } from "./strategies"
 import About from "../About/About"
 import { Image } from "@mirohq/websdk-types/stable/features/widgets/image"
 import { TokenService } from "../../services/TokenService"
+import { NotificationService } from "../../services/NotificationService"
 
 const handleAppClick = async () => {
   await miro.board.ui.openPanel({
@@ -23,6 +24,10 @@ const handleItemDelete = async (event: ItemsDeleteEvent) => {
     .forEach((token) => {
       void tokenService.removeToken(token.title, token.alt as string)
     })
+}
+
+const handleBroadcastMessages = (message: string) => {
+  void miro.board.notifications.showInfo(message)
 }
 
 type PanelProps = {}
@@ -68,10 +73,12 @@ const Panel = (_props: PanelProps) => {
   useEffect(() => {
     void board.ui.on("icon:click", handleAppClick)
     void board.ui.on("items:delete", handleItemDelete)
+    void board.events.on("message", handleBroadcastMessages)
 
     return () => {
       void board.ui.off("icon:click", handleAppClick)
       void board.ui.off("items:delete", handleItemDelete)
+      void board.events.off("message", handleBroadcastMessages)
     }
   }, [])
 
@@ -87,8 +94,9 @@ const Panel = (_props: PanelProps) => {
     }
   }
 
-  const handleResetCounters = () => {
-    // const tokensStorage = getStorage("tokens")
+  const handleResetCounters = async () => {
+    await TokenService.getInstance().reset()
+    await NotificationService.getInstance().showMessage("Token counters have been reset.")
   }
 
   return (
@@ -150,7 +158,7 @@ const Panel = (_props: PanelProps) => {
 
       <div className="grid-full-width">
         <button className="button button-secondary w-100" onClick={handleResetCounters}>
-          Reset counters
+          Reset token counters
         </button>
       </div>
 
