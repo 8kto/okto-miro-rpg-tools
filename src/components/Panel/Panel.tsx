@@ -93,6 +93,11 @@ const Panel = (_props: PanelProps) => {
     }
   }
 
+  const handleResetCounters = () => {
+    const tokensStorage = board.storage.collection("tokens")
+
+  }
+
   return (
     <div className="space-y-1">
       <p className="my-medium">Drag and drop token or convert existing images on the board.</p>
@@ -147,6 +152,15 @@ const Panel = (_props: PanelProps) => {
           }
         >
           Convert selected image to token
+        </button>
+      </div>
+
+      <div className="grid-full-width">
+        <button
+          className="button button-secondary w-100"
+          onClick={handleResetCounters}
+        >
+          Reset counters
         </button>
       </div>
 
