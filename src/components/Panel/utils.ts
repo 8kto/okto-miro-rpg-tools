@@ -63,6 +63,7 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
     selectedImage.title = title
     selectedImage.alt = title
     void selectedImage.sync()
+    // void board.storage.collection("tokens:items").
   }
 
   const titleText = await getTokenTitle({
