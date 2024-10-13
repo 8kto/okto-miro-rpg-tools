@@ -1,4 +1,3 @@
-import './dice-roller.css'
 import { DiceAction } from "../../data/dices"
 import { NotificationService } from "../../services/NotificationService"
 
