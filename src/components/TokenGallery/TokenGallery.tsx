@@ -95,6 +95,7 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
                     className="miro-draggable draggable-item draggable-item--image"
                     alt={title}
                     title={title}
+                    data-token-id={tokenTitle}
                   />
                 ) : (
                   <div className="loading-placeholder">Loading...</div> // Placeholder while loading

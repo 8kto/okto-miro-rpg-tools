@@ -1,7 +1,7 @@
 import { Image } from "@mirohq/websdk-types/stable/features/widgets/image"
 import { DEFAULT_TITLE_FONT_SIZE, DEFAULT_TOKEN_SIZE } from "./consts"
-//import { getSpacing } from "./utils.getSpacing"
 import { StrategyDef } from "./strategies"
+import { TokenService } from "../../services/TokenService"
 
 export const getTitleFontSize = (input: number): number => {
   const ratio = DEFAULT_TITLE_FONT_SIZE / DEFAULT_TOKEN_SIZE
@@ -34,9 +34,12 @@ export const getTokenTitle = async ({
   })
 }
 
-export const convertImageToToken = async (options?: { image?: Image; tokenSize: number; strategy: StrategyDef }) => {
+export const convertImageToToken = async (options?: {
+  image?: Image
+  tokenSize: number
+  strategy: StrategyDef
+}): Promise<Image | null> => {
   const { board } = miro
-  const tokensStorage = board.storage.collection("tokens")
   const { image, tokenSize = DEFAULT_TOKEN_SIZE, strategy } = options || {}
 
   if (!strategy) {
@@ -47,36 +50,35 @@ export const convertImageToToken = async (options?: { image?: Image; tokenSize: 
   const selectedImage = image || (selectedWidgets.find((widget) => widget.type === "image") as Image)
 
   if (!selectedImage) {
-    return
+    console.error("No token image found")
+    return null
   }
 
-  // Get the image's dimensions and URL
-  const { width, x, y } = selectedImage
-  let { title } = selectedImage
+  const { title: tokenUiTitle, width, x, y } = selectedImage
 
-  if (title) {
-    let counter = await tokensStorage.get<number>(title)
-    if (!counter) counter = 0
-    void tokensStorage.set(title, ++counter)
-
-    title = `${selectedImage.title} (${counter})`
-    selectedImage.title = title
-    selectedImage.alt = title
-    void selectedImage.sync()
-    // void board.storage.collection("tokens:items").
+  if (!tokenUiTitle) {
+    console.error("No image title found", selectedImage)
+    return null
   }
+
+  const tokenId = await TokenService.getInstance().addToken(tokenUiTitle)
+
+  selectedImage.title = tokenUiTitle
+  selectedImage.alt = tokenId
+  void selectedImage.sync()
 
   const titleText = await getTokenTitle({
     x,
     y: y - tokenSize / 2 - 10,
-    title: title || "NA",
+    title: tokenId || "NA",
     tokenSize,
   })
 
   const buffer = await strategy.run({ x, y, width, n: 8, tokenSize })
-
   await board.group({ items: [selectedImage, titleText, ...buffer] })
-  await titleText.sync()
+  void titleText.sync()
+
+  return selectedImage
 }
 
 export const formatTokenTitle = (tokenTitle: string): string => {

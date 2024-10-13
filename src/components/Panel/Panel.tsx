@@ -7,6 +7,7 @@ import { DropEvent, ItemsDeleteEvent } from "@mirohq/websdk-types/stable/api/ui"
 import strategiesMap, { StrategyId } from "./strategies"
 import About from "../About/About"
 import { Image } from "@mirohq/websdk-types/stable/features/widgets/image"
+import { TokenService } from "../../services/TokenService"
 
 const handleAppClick = async () => {
   await miro.board.ui.openPanel({
@@ -15,22 +16,13 @@ const handleAppClick = async () => {
 }
 
 const handleItemDelete = async (event: ItemsDeleteEvent) => {
-  const tokensStorage = miro.board.storage.collection("tokens")
   const createdItems = event.items
-  const tokens = createdItems.filter((item): item is Image => item.type === "image")
-
-  for (const token of tokens) {
-    const { title: titlePrefixed } = token
-    const title = titlePrefixed.replace(/\s*\(\d+\)$/, "")
-    const num = titlePrefixed.match(/\s*\((\d+)\)$/)?.[1]
-    const counter = await tokensStorage.get<number>(title)
-
-    if (counter && num && Number.isInteger(+counter) && Number.isInteger(+num)) {
-      if (+counter === +num) {
-        void tokensStorage.set(title, counter - 1)
-      }
-    }
-  }
+  const tokenService = TokenService.getInstance()
+  createdItems
+    .filter((item): item is Image => item.type === "image")
+    .forEach((token) => {
+      void tokenService.removeToken(token.title, token.alt as string)
+    })
 }
 
 type PanelProps = {}
@@ -45,14 +37,16 @@ const Panel = (_props: PanelProps) => {
       const { target, x, y } = event
 
       if (target instanceof HTMLImageElement) {
+        const { title, src, dataset } = target
         const image = await board.createImage({
           x,
           y,
           width: tokenSize,
-          url: target.src,
-          title: target.title,
-          alt: target.title,
+          url: src,
+          title: title,
+          alt: dataset.tokenId,
         })
+
         void convertImageToToken({
           image,
           tokenSize,
@@ -94,8 +88,7 @@ const Panel = (_props: PanelProps) => {
   }
 
   const handleResetCounters = () => {
-    const tokensStorage = board.storage.collection("tokens")
-
+    // const tokensStorage = getStorage("tokens")
   }
 
   return (
@@ -156,10 +149,7 @@ const Panel = (_props: PanelProps) => {
       </div>
 
       <div className="grid-full-width">
-        <button
-          className="button button-secondary w-100"
-          onClick={handleResetCounters}
-        >
+        <button className="button button-secondary w-100" onClick={handleResetCounters}>
           Reset counters
         </button>
       </div>
