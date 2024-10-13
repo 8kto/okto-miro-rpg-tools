@@ -27,10 +27,10 @@ export const secureRandomInteger = (min: number, max: number): number => {
 export const roll = (dice = Dice.d100): number => secureRandomInteger(1, dice)
 
 export const rollDiceFormula = (formula: string): number => {
-  const [numDice, numSides] = formula.split('d').map(Number)
+  const [numDice, numSides] = formula.split("d").map(Number)
 
   if (isNaN(numDice) || isNaN(numSides)) {
-    throw new Error('Invalid dice formula')
+    throw new Error("Invalid dice formula")
   }
 
   let total = 0
@@ -44,7 +44,7 @@ export const rollDiceFormula = (formula: string): number => {
 
 export const getRandomArrayItem = <T = unknown>(arr: Array<T>): T => {
   if (!arr.length) {
-    throw new Error('Empty array')
+    throw new Error("Empty array")
   }
 
   return arr[secureRandomInteger(0, arr.length - 1)]
@@ -52,10 +52,10 @@ export const getRandomArrayItem = <T = unknown>(arr: Array<T>): T => {
 
 export const getRandomArrayItems = <T = unknown>(arr: Array<T>, count: number): Array<T> => {
   if (count > arr.length) {
-    throw new Error('Requested more elements than are present in the array')
+    throw new Error("Requested more elements than are present in the array")
   }
   if (!count) {
-    throw new Error('Count should be more than 0')
+    throw new Error("Count should be more than 0")
   }
 
   const result: Array<T> = []

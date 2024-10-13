@@ -95,14 +95,14 @@ img {
   user-select: none;
 }
 
-
 /* DICE ROLLER */
 .dice-bar {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   /*gap: 3px;*/
 }
 
 .button--dice-roller {
-  margin: 0!important;
+  margin: 0 !important;
 }
