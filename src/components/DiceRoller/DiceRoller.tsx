@@ -2,12 +2,12 @@ import { DiceAction } from "../../data/dices"
 import { NotificationService } from "../../services/NotificationService"
 
 type DiceBarProps = {
-  dices: DiceAction[];
-};
+  dices: DiceAction[]
+}
 
 const handleDiceRollAction = (item: DiceAction) => {
   const res = item.action()
-  const message = `Roll (d${item.dice}): ${res}`
+  const message = `Roll (${item.title}): ${res}`
   void NotificationService.getInstance().showMessageNamed(message)
   console.log(message)
 }
@@ -21,11 +21,11 @@ const DiceBar = ({ dices }: DiceBarProps) => {
           onClick={() => handleDiceRollAction(diceAction)}
           className="button button-smallxxx button-danger button--dice-roller"
         >
-          d{diceAction.dice}
+          {diceAction.title}
         </button>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default DiceBar;
+export default DiceBar
