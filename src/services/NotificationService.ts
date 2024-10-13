@@ -1,3 +1,5 @@
+import { LogService } from "./LogService"
+
 export class NotificationService {
   private static instance: NotificationService
 
@@ -16,6 +18,7 @@ export class NotificationService {
       // @ts-ignore
       type: "info",
     })
+    void LogService.getInstance().add(message)
   }
 
   async showMessageNamed(message: string) {
