@@ -1,4 +1,4 @@
-import { Dice, roll } from "../services/DiceRoller"
+import { Dice, roll } from "../services/diceUtils"
 
 export type DiceAction = {
   dice: Dice;
