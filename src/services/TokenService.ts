@@ -3,20 +3,21 @@ import { getStorage, ICollection } from "./Storage"
 type TokenName = string
 type TokenId = string
 type TokenData = {
-  damage: number
   no: number
 }
 
 type TokenStorage = Record<TokenName, Record<TokenId, TokenData>>
-const STORAGE_KEY = "data"
 
 export class TokenService {
+  private static readonly STORAGE_NAME = "tokens"
+  private static readonly STORAGE_DATA_KEY = "data"
+
   private static instance: TokenService
   private storage: ICollection
   private isStorageSet: boolean = false
 
   constructor() {
-    this.storage = getStorage("tokens")
+    this.storage = getStorage(TokenService.STORAGE_NAME)
   }
 
   static getInstance(): TokenService {
@@ -27,22 +28,24 @@ export class TokenService {
     return TokenService.instance
   }
 
-  private async initStorage() {
+  private async initStorage(): Promise<this> {
     if (this.isStorageSet) {
-      return
+      return this
     }
 
-    const data = await this.storage.get(STORAGE_KEY)
+    const data = await this.storage.get(TokenService.STORAGE_DATA_KEY)
     if (typeof data === "undefined") {
-      await this.storage.set(STORAGE_KEY, {} as TokenStorage)
+      await this.storage.set(TokenService.STORAGE_DATA_KEY, {} as TokenStorage)
       this.isStorageSet = true
     }
+
+    return this
   }
 
-  async addToken(tokenName: TokenName): Promise<string> {
+  async addToken(tokenName: TokenName): Promise<TokenId> {
     await this.initStorage()
 
-    const storage = (await this.storage.get<TokenStorage>(STORAGE_KEY)) as TokenStorage
+    const storage = (await this.storage.get<TokenStorage>(TokenService.STORAGE_DATA_KEY)) as TokenStorage
     let tokenNo: number
 
     if (!storage[tokenName]) {
@@ -57,19 +60,19 @@ export class TokenService {
 
     let tokenId = `${tokenName} (${tokenNo})`
     if (!storage[tokenName][tokenId]) {
-      storage[tokenName][tokenId] = { damage: 0, no: tokenNo }
+      storage[tokenName][tokenId] = { no: tokenNo }
     } else {
       throw new Error("Desynced storage items")
     }
 
-    await this.storage.set(STORAGE_KEY, storage)
+    await this.storage.set(TokenService.STORAGE_DATA_KEY, storage)
 
     return tokenId
   }
 
   async removeToken(name: TokenName, id: TokenId) {
     await this.initStorage()
-    const storage = (await this.storage.get<TokenStorage>(STORAGE_KEY)) as TokenStorage
+    const storage = (await this.storage.get<TokenStorage>(TokenService.STORAGE_DATA_KEY)) as TokenStorage
 
     const data = storage?.[name]?.[id]
     if (!data) {
@@ -77,6 +80,12 @@ export class TokenService {
     }
 
     delete storage[name][id]
-    await this.storage.set(STORAGE_KEY, storage)
+    await this.storage.set(TokenService.STORAGE_DATA_KEY, storage)
+  }
+
+  async reset(): Promise<this> {
+    await this.storage.set(TokenService.STORAGE_DATA_KEY, {})
+
+    return this
   }
 }
