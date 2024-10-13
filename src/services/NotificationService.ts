@@ -10,11 +10,16 @@ export class NotificationService {
   }
 
   async showMessage(message: string) {
-    await miro.board.events.broadcast("message", message)
-    await miro.board.notifications.show({
+    void miro.board.events.broadcast("message", message)
+    void miro.board.notifications.show({
       message: message,
       // @ts-ignore
       type: "info",
     })
+  }
+
+  async showMessageNamed(message: string) {
+    const user = await miro.board.getUserInfo()
+    this.showMessage(`${user.name}: ${message}`)
   }
 }
