@@ -24,3 +24,4 @@ yarn-error.log*
 dist
 tsconfig.tsbuildinfo
 .env.development.local
+size-plugin.json
