@@ -5,7 +5,6 @@ import { DEFAULT_STRATEGY_ID, DEFAULT_TOKEN_SIZE } from "./consts"
 import TokenGallery from "../TokenGallery/TokenGallery"
 import { DropEvent, ItemsDeleteEvent } from "@mirohq/websdk-types/stable/api/ui"
 import strategiesMap, { StrategyId } from "./strategies"
-import About from "../About/About"
 import { Image } from "@mirohq/websdk-types/stable/features/widgets/image"
 import { TokenService } from "../../services/TokenService"
 import { NotificationService } from "../../services/NotificationService"
@@ -135,11 +134,6 @@ const Panel = (_props: PanelProps) => {
             </p>
           </div>
         </div>
-      </details>
-
-      <details>
-        <summary className="h3 accordion-item">About</summary>
-        <About />
       </details>
 
       <div className="grid-full-width">
