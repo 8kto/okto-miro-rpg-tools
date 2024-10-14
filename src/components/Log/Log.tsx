@@ -37,11 +37,18 @@ const Log = () => {
   }, [])
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "80vh", // Occupies full height of the viewport
+        padding: "10px",
+      }}
+    >
       <div
         ref={logRef}
         style={{
-          height: "200px",
+          flexGrow: 1, // Allows the log area to grow and take up available space
           overflowY: "scroll",
           border: "1px solid #ccc",
           padding: "10px",
@@ -54,11 +61,12 @@ const Log = () => {
         ))}
       </div>
       <div className="grid-full-width">
-        <button className="button button-secondary w-100" onClick={handleReset}>
+        <button className="button button-tertiary w-100" onClick={handleReset}>
+          <span class="icon icon-trash"></span>
           Clear logs
         </button>
       </div>
-    </>
+    </div>
   )
 }
 
