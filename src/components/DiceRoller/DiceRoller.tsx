@@ -20,18 +20,37 @@ const handleDiceRollAction = (item: DiceAction) => {
 }
 
 const DiceBar = ({ dices }: DiceBarProps) => {
+  const primaryButtons = dices.filter((d) => !d.type || d.type === "primary")
+  const secondaryButtons = dices.filter((d) => d.type === "secondary")
+
   return (
-    <div className="dice-bar">
-      {dices.map((diceAction, index) => (
-        <button
-          key={index}
-          onClick={() => handleDiceRollAction(diceAction)}
-          className="button button-smallxxx button-danger button--dice-roller"
-        >
-          {diceAction.title}
-        </button>
-      ))}
-    </div>
+    <>
+      <div className="dice-bar">
+        {primaryButtons.map((diceAction, index) => (
+          <button
+            key={index}
+            onClick={() => handleDiceRollAction(diceAction)}
+            className={`button button--dice-roller ${diceAction.type === "secondary" ? "button-secondary" : "button-danger"}`}
+          >
+            {diceAction.title}
+          </button>
+        ))}
+      </div>
+
+      {!!secondaryButtons.length && (
+        <div className="dice-bar mt-medium">
+          {secondaryButtons.map((diceAction, index) => (
+            <button
+              key={index}
+              onClick={() => handleDiceRollAction(diceAction)}
+              className={`button button--dice-roller ${diceAction.type === "secondary" ? "button-secondary" : "button-danger"}`}
+            >
+              {diceAction.title}
+            </button>
+          ))}
+        </div>
+      )}
+    </>
   )
 }
 
