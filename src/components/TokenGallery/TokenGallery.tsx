@@ -72,7 +72,6 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
   return (
     <>
       <h3 className="h2 section-header">Token gallery</h3>
-      <p className="p">Tokens used: Devin Night (immortalnights.com), VTT Token Maker (thefatefulforce.com)</p>
 
       <SearchInput handleInputChange={(value) => setSearchInputValue(value)} />
 
