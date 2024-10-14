@@ -25,3 +25,5 @@ dist
 tsconfig.tsbuildinfo
 .env.development.local
 size-plugin.json
+src/images/tokens/
+src/images/tokens
