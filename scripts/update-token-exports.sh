@@ -4,16 +4,15 @@
 cd "$(dirname "$0")/.."
 
 # Directory containing the token images
-TOKEN_DIR="src/images/tokens/rounded"
+TOKEN_DIR="src/images/tokens/"
 OUTPUT_FILE="src/data/tokenExports.ts"
 
 # Start by clearing the output file
 echo "// Auto-generated token exports (Lazy Loaded)" > "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
-# Function to convert filenames to PascalCase and append 'Token'
 toPascalCase() {
-  echo "$1" | sed -r 's/(^|-|_)([a-z])/\U\2/g' | sed 's/\.png//g' | sed 's/^/Token/'
+  echo "$1" | sed -r 's/[^a-zA-Z0-9]+/_/g; s/(^|_)([a-z])/\U\2/g; s/^/Token/; s/\.png$//'
 }
 
 # Add the opening of the tokens object
@@ -28,8 +27,10 @@ find "$TOKEN_DIR" -mindepth 1 -maxdepth 2 -type f -name "*.png" | while read -r 
     # Convert the name to PascalCase for the import variable
     exportName="$(toPascalCase "$name")"
 
+    # Calculate the relative path, removing the TOKEN_DIR prefix
+    relative_path="../images/tokens/${file#"$TOKEN_DIR"}"
+
     # Write the dynamic import statement inside the tokens object
-    relative_path=$(realpath --relative-to="src/data" "$file")
     echo "  $exportName: () => import('$relative_path')," >> "$OUTPUT_FILE"
 done
 
