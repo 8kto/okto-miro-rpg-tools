@@ -5,10 +5,8 @@ const Log = () => {
   const [messages, setMessages] = useState<LogStorage>([])
   const logRef = useRef<HTMLDivElement>(null)
 
-  const handleAddLog = (messages?: string) => {
+  const handleAddLog = (messages?: LogStorage) => {
     if (messages?.length) {
-      // FIXME types
-      // @ts-ignore
       setMessages(messages)
     }
   }
@@ -38,7 +36,7 @@ const Log = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "80vh", // Occupies full height of the viewport
+        height: "80vh",
         padding: "10px",
       }}
     >
