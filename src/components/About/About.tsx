@@ -1,6 +1,7 @@
 const About = () => (
   <>
     <p>
+      2024{" "}
       <a
         property="dct:title"
         target="_blank"
@@ -22,7 +23,10 @@ const About = () => (
       <a target="_blank" rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://ivlev.blog">
         webpage
       </a>
-      ) is licensed under{" "}
+      )
+    </p>
+    <p>
+      Licensed under{" "}
       <a
         href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
         target="_blank"
