@@ -18,10 +18,10 @@ export default function App() {
           <Tab>About</Tab>
         </TabList>
 
-        <TabPanel>
+        <TabPanel forceRender>
           <Panel />
         </TabPanel>
-        <TabPanel>
+        <TabPanel forceRender>
           <DiceRoller dices={dices} />
           <Log />
         </TabPanel>
