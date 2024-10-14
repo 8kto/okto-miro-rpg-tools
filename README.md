@@ -1,13 +1,12 @@
 # Okto Miro RPG Tools
 
 **Okto Miro RPG Tools** is a free plugin for [Miro](https://miro.com/) designed to enhance role-playing game (RPG)
-sessions. It provides a variety of tools to streamline RPG game management, helping game masters and players run
-smoother sessions in Miro’s collaborative whiteboard environment.
+sessions.
 
 ## Features
 
 - Drag-and-drop RPG tokens
-- Tools for managing hit points and tracking damage
+- Dice roller
 
 ## Installation
 
@@ -26,17 +25,7 @@ board.
 
 ## Images and Tokens
 
-The following token images are used in this project:
-
-- **Devin Night** tokens, available from [immortalnights.com](https://immortalnights.com), are used for various RPG
-  character and monster tokens.
-- **VTT Token Maker** tokens, created by **The Fateful Force**, available
-  from [thefatefulforce.com](https://thefatefulforce.com), are also integrated into this tool.
-
-These assets are used under their respective licenses, and full attribution is provided. Please visit the respective
-websites for more details on the original creators and their work.
-
-I also used some other images that I quickly found on the web or generated with AI. Contact me if you are concerned about some of them.
+Put your tokens in `src/images/tokens` to make them appear in the Token Gallery.
 
 ## License
 
