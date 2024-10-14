@@ -108,7 +108,7 @@ img {
 }
 
 /* LOGS */
-.log-records-wrapper{
+.log-records-wrapper {
   display: flex;
   flex-direction: column;
   height: 80vh;
@@ -148,6 +148,5 @@ img {
 }
 
 .log-record--timestamp .icon {
-  color: var(--indigo200)!important;
+  color: var(--indigo200) !important;
 }
-
