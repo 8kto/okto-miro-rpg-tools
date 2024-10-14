@@ -31,7 +31,7 @@ const handleBroadcastMessages = (message: string) => {
 
 type PanelProps = {}
 
-const Panel = (_props: PanelProps) => {
+const TokenPanel = (_props: PanelProps) => {
   const { board } = miro
   const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
   const [selectedStrategyId, setSelectedStrategyId] = useState<StrategyId>(DEFAULT_STRATEGY_ID)
@@ -160,4 +160,4 @@ const Panel = (_props: PanelProps) => {
     </div>
   )
 }
-export default Panel
+export default TokenPanel
