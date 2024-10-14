@@ -11,7 +11,7 @@ import About from "./components/About/About"
 export default function App() {
   return (
     <div id="root">
-      <Tabs>
+      <Tabs selectedIndex={1}>
         <TabList>
           <Tab>Tokens</Tab>
           <Tab>Dice roller</Tab>

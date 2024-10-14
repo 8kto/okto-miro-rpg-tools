@@ -1,6 +1,16 @@
 import { useState, useEffect, useRef } from "preact/compat"
 import { LogService, LogStorage } from "../../services/LogService"
 
+const formatTimestamp = (timestamp: number) => {
+  const date = new Date(timestamp)
+  return date.toLocaleTimeString("en-GB", { // 'en-GB' uses 24-hour format
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  })
+}
+
 const Log = () => {
   const [messages, setMessages] = useState<LogStorage>([])
   const logRef = useRef<HTMLDivElement>(null)
@@ -32,27 +42,20 @@ const Log = () => {
   }, [])
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "80vh",
-        padding: "10px",
-      }}
-    >
+    <div className="log-records-wrapper">
       <div
         ref={logRef}
-        style={{
-          flexGrow: 1,
-          overflowY: "scroll",
-          border: "1px solid #ccc",
-          padding: "10px",
-          margin: "10px 0",
-          fontSize: "18px",
-        }}
+        className="log-records-list"
       >
-        {messages.map((message, index) => (
-          <div key={index}>{message.text}</div>
+        {messages.map((log, index) => (
+          <div key={index} className="log-record">
+            <div class="log-record--timestamp">
+              ⏱️ {formatTimestamp(log.timestamp)}
+            </div>
+            <span class="log-record--user">{log.user}</span>:{" "}
+            <span class="log-record--title">{log.title}</span>:{" "}
+            <span class="log-record--text">{log.text}</span>
+          </div>
         ))}
       </div>
       <div className="grid-full-width">
