@@ -9,7 +9,7 @@ const About = () => (
         href="https://github.com/8kto/okto-miro-rpg-tools"
       >
         Okto Miro RPG Tools
-      </a>{" "}
+      </a>{" "} <br/>
       by{" "}
       <a
         target="_blank"
