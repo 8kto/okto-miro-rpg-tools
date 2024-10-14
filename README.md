@@ -51,8 +51,6 @@ For full license details, see the [LICENSE.md](./LICENSE.md) file.
 Contributions are welcome! Please feel free to submit pull requests, open issues, or suggest features.
 
 ## TODO
-- Increment token titles
-- Dice rolls
+- Dice rolls, custom formulas
 - Custom context actions (https://developers.miro.com/docs/add-custom-actions-to-your-app)
-- Deploy app
 - Docker image to run locally
