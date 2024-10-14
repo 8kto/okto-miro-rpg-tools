@@ -20,7 +20,7 @@ export class LogService {
     this.storage = getStorage(LogService.STORAGE_NAME)
   }
 
-  onAdd(cb: (messages?: string) => void) {
+  onAdd(cb: (messages?: LogStorage) => void) {
     void this.storage.onValue(LogService.STORAGE_DATA_KEY, cb)
 
     return () => this.storage.offValue(LogService.STORAGE_DATA_KEY, cb)
