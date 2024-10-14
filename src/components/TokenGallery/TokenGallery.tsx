@@ -98,7 +98,7 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
                     data-token-id={tokenTitle}
                   />
                 ) : (
-                  <div className="loading-placeholder">Loading...</div> // Placeholder while loading
+                  <div className="loading-placeholder">Loading...</div>
                 )}
                 <span className="token-title">{title}</span>
               </div>
