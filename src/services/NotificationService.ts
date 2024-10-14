@@ -1,7 +1,12 @@
-import { LogService } from "./LogService"
+import { UserService } from "./UserService"
 
 export class NotificationService {
   private static instance: NotificationService
+  private readonly userService: UserService
+
+  constructor() {
+    this.userService = UserService.getInstance()
+  }
 
   static getInstance(): NotificationService {
     if (!NotificationService.instance) {
@@ -18,11 +23,10 @@ export class NotificationService {
       // @ts-ignore
       type: "info",
     })
-    void LogService.getInstance().add(message)
   }
 
   async showMessageNamed(message: string) {
-    const user = await miro.board.getUserInfo()
-    this.showMessage(`${user.name}: ${message}`)
+    const user = await this.userService.getCurrentUser()
+    return this.showMessage(`${user.name}: ${message}`)
   }
 }

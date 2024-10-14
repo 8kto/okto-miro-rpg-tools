@@ -1,11 +1,14 @@
 import { getStorage, ICollection } from "./Storage"
+import { UserService } from "./UserService"
 
-type LogData = {
-  text: string
+type LogRecord = {
+  title: string
+  text: string | number
   timestamp: number
+  user: string
 }
 
-export type LogStorage = LogData[]
+export type LogStorage = LogRecord[]
 
 export class LogService {
   private static readonly STORAGE_NAME = "logs"
@@ -13,11 +16,14 @@ export class LogService {
 
   private static instance: LogService
 
-  private storage: ICollection
+  private readonly userService: UserService
+  private readonly storage: ICollection
+
   private isStorageSet: boolean = false
 
   constructor() {
     this.storage = getStorage(LogService.STORAGE_NAME)
+    this.userService = UserService.getInstance()
   }
 
   onAdd(cb: (messages?: LogStorage) => void) {
@@ -39,8 +45,8 @@ export class LogService {
       return this
     }
 
-    const data = await this.storage.get<LogStorage>(LogService.STORAGE_DATA_KEY)
-    if (typeof data === "undefined") {
+    const logs = await this.storage.get<LogStorage>(LogService.STORAGE_DATA_KEY)
+    if (typeof logs === "undefined") {
       await this.storage.set(LogService.STORAGE_DATA_KEY, [] as LogStorage)
       this.isStorageSet = true
     }
@@ -48,15 +54,24 @@ export class LogService {
     return this
   }
 
-  async add(message: string) {
+  async add(log: Omit<LogRecord, 'timestamp' | 'user'>) {
     await this.initStorage()
-    const storage = (await this.storage.get<LogStorage>(LogService.STORAGE_DATA_KEY)) as LogStorage
+    const [logs, user] = await Promise.all([
+      this.storage.get<LogStorage>(LogService.STORAGE_DATA_KEY),
+      this.userService.getCurrentUser()
+    ]);
 
-    storage.push({
-      text: message,
+    if (!logs) { // massage tsc
+      return
+    }
+
+    logs.push({
+      ...log,
+      user: user.name,
       timestamp: new Date().getTime(),
     })
-    await this.storage.set(LogService.STORAGE_DATA_KEY, storage.concat())
+
+    await this.storage.set(LogService.STORAGE_DATA_KEY, logs.concat())
   }
 
   async reset(): Promise<this> {
