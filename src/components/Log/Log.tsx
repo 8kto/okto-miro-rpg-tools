@@ -3,7 +3,8 @@ import { LogService, LogStorage } from "../../services/LogService"
 
 const formatTimestamp = (timestamp: number) => {
   const date = new Date(timestamp)
-  return date.toLocaleTimeString("en-GB", { // 'en-GB' uses 24-hour format
+  return date.toLocaleTimeString("en-GB", {
+    // 'en-GB' uses 24-hour format
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -43,17 +44,11 @@ const Log = () => {
 
   return (
     <div className="log-records-wrapper">
-      <div
-        ref={logRef}
-        className="log-records-list"
-      >
+      <div ref={logRef} className="log-records-list">
         {messages.map((log, index) => (
           <div key={index} className="log-record">
-            <div class="log-record--timestamp">
-              ⏱️ {formatTimestamp(log.timestamp)}
-            </div>
-            <span class="log-record--user">{log.user}</span>:{" "}
-            <span class="log-record--title">{log.title}</span>:{" "}
+            <div class="log-record--timestamp">⏱️ {formatTimestamp(log.timestamp)}</div>
+            <span class="log-record--user">{log.user}</span>: <span class="log-record--title">{log.title}</span>:{" "}
             <span class="log-record--text">{log.text}</span>
           </div>
         ))}

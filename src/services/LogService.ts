@@ -54,14 +54,15 @@ export class LogService {
     return this
   }
 
-  async add(log: Omit<LogRecord, 'timestamp' | 'user'>) {
+  async add(log: Omit<LogRecord, "timestamp" | "user">) {
     await this.initStorage()
     const [logs, user] = await Promise.all([
       this.storage.get<LogStorage>(LogService.STORAGE_DATA_KEY),
-      this.userService.getCurrentUser()
-    ]);
+      this.userService.getCurrentUser(),
+    ])
 
-    if (!logs) { // massage tsc
+    if (!logs) {
+      // massage tsc
       return
     }
 
