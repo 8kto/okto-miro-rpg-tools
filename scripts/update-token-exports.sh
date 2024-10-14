@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 
 # Directory containing the token images
 TOKEN_DIR="src/images/tokens/"
-OUTPUT_FILE="src/data/tokenExports.ts"
+OUTPUT_FILE="src/data/tokenAutoExports.ts"
 
 # Start by clearing the output file
 echo "// Auto-generated token exports (Lazy Loaded)" > "$OUTPUT_FILE"
@@ -39,6 +39,5 @@ echo "}" >> "$OUTPUT_FILE"
 
 # Add the export statements
 echo -e "\nexport default tokens" >> "$OUTPUT_FILE"
-echo -e "\nexport type TokenDict = typeof tokens" >> "$OUTPUT_FILE"
 
 echo "Lazy-loaded exports have been written to $OUTPUT_FILE"

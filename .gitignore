@@ -27,4 +27,4 @@ tsconfig.tsbuildinfo
 size-plugin.json
 src/images/tokens/
 src/images/tokens
-src/data/tokenExports.ts
+src/data/tokenAutoExports.ts

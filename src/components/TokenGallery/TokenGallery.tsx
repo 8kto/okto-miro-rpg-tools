@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "preact/compat"
-import { TokenDict } from "../../data/tokenExports"
+import type { TokenDict } from "../../data/tokenExports"
 import { formatTokenTitle } from "../Panel/utils"
 import SearchInput from "../SearchInput/SearchInput"
 
