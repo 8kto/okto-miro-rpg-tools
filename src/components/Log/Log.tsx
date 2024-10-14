@@ -5,7 +5,6 @@ const Log = () => {
   const [messages, setMessages] = useState<LogStorage>([])
   const logRef = useRef<HTMLDivElement>(null)
 
-  // Function to handle broadcast messages and update the log
   const handleAddLog = (messages?: string) => {
     if (messages?.length) {
       // FIXME types
@@ -26,13 +25,11 @@ const Log = () => {
     }
   }, [messages])
 
-  // Listen for new messages from the board
   useEffect(() => {
-    LogService.getInstance().onAdd(handleAddLog)
+    const cleanup = LogService.getInstance().onAdd(handleAddLog)
 
-    // Cleanup on component unmount
     return () => {
-      LogService.getInstance().offAdd(handleAddLog)
+      void cleanup()
     }
   }, [])
 
@@ -48,7 +45,7 @@ const Log = () => {
       <div
         ref={logRef}
         style={{
-          flexGrow: 1, // Allows the log area to grow and take up available space
+          flexGrow: 1,
           overflowY: "scroll",
           border: "1px solid #ccc",
           padding: "10px",

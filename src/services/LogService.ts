@@ -21,11 +21,9 @@ export class LogService {
   }
 
   onAdd(cb: (messages?: string) => void) {
-    return this.storage.onValue(LogService.STORAGE_DATA_KEY, cb)
-  }
+    void this.storage.onValue(LogService.STORAGE_DATA_KEY, cb)
 
-  offAdd(cb: (message?: string) => void) {
-    return this.storage.offValue(LogService.STORAGE_DATA_KEY, cb)
+    return () => this.storage.offValue(LogService.STORAGE_DATA_KEY, cb)
   }
 
   static getInstance(): LogService {
