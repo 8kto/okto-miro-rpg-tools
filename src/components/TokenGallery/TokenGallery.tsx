@@ -32,7 +32,7 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
   useEffect(() => {
     let tokenEntries = Object.entries(tokens)
 
-    if (searchInputValue) {
+    if (searchInputValue?.length > 1) {
       // If search is active, load all matched tokens
       tokenEntries = tokenEntries.filter(([tokenTitle]) =>
         tokenTitle.toLowerCase().includes(searchInputValue.toLowerCase()),
@@ -44,7 +44,7 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
 
     tokenEntries.forEach(([tokenTitle, tokenLoader]) => {
       if (!loadedTokens[tokenTitle]) {
-        loadTokenImage(tokenTitle, tokenLoader)
+        void loadTokenImage(tokenTitle, tokenLoader)
       }
     })
   }, [searchInputValue, tokens, loadedTokens, displayCount])
@@ -78,7 +78,9 @@ const TokenGallery = ({ tokens }: TokenGalleryProps) => {
       <div className="grid-container">
         {Object.entries(tokens)
           .filter(([tokenTitle]) => {
-            return searchInputValue ? tokenTitle.toLowerCase().includes(searchInputValue.toLowerCase()) : true // If no search input, load progressively
+            return searchInputValue?.length > 1
+              ? tokenTitle.toLowerCase().includes(searchInputValue.toLowerCase())
+              : true // If no search input, load progressively
           })
           .slice(0, searchInputValue ? undefined : displayCount)
           .map(([tokenTitle]) => {
