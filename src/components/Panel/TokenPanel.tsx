@@ -29,9 +29,7 @@ const handleBroadcastMessages = (message: string) => {
   void miro.board.notifications.showInfo(message)
 }
 
-type PanelProps = {}
-
-const TokenPanel = (_props: PanelProps) => {
+const TokenPanel = () => {
   const { board } = miro
   const [tokenSize, setTokenSize] = useState(DEFAULT_TOKEN_SIZE)
   const [selectedStrategyId, setSelectedStrategyId] = useState<StrategyId>(DEFAULT_STRATEGY_ID)
@@ -130,7 +128,7 @@ const TokenPanel = (_props: PanelProps) => {
             </select>
             <p>
               {" "}
-              <span class="label label-info">INFO</span> {strategiesMap[selectedStrategyId].details}
+              <span className="label label-info">INFO</span> {strategiesMap[selectedStrategyId].details}
             </p>
           </div>
         </div>

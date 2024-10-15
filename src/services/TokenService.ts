@@ -58,7 +58,7 @@ export class TokenService {
       tokenNo = maxNumber + 1
     }
 
-    let tokenId = `${tokenName} (${tokenNo})`
+    const tokenId = `${tokenName} (${tokenNo})`
     if (!storage[tokenName][tokenId]) {
       storage[tokenName][tokenId] = { no: tokenNo }
     } else {

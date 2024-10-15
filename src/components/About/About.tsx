@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 const About = () => (
   <>
     <p>
@@ -5,7 +6,7 @@ const About = () => (
       <a
         property="dct:title"
         target="_blank"
-        rel="cc:attributionURL"
+        rel="cc:attributionURL noreferrer"
         href="https://github.com/8kto/okto-miro-rpg-tools"
       >
         Okto Miro RPG Tools
@@ -14,14 +15,19 @@ const About = () => (
       by{" "}
       <a
         target="_blank"
-        rel="cc:attributionURL dct:creator"
+        rel="cc:attributionURL dct:creator noreferrer"
         property="cc:attributionName"
         href="https://github.com/8kto"
       >
         undefined / 8kto
       </a>{" "}
       (
-      <a target="_blank" rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://ivlev.blog">
+      <a
+        target="_blank"
+        rel="cc:attributionURL dct:creator noreferrer"
+        property="cc:attributionName"
+        href="https://ivlev.blog"
+      >
         webpage
       </a>
       )

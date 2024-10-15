@@ -47,15 +47,15 @@ const Log = () => {
       <div ref={logRef} className="log-records-list">
         {messages.map((log, index) => (
           <div key={index} className="log-record">
-            <div class="log-record--timestamp">⏱️ {formatTimestamp(log.timestamp)}</div>
-            <span class="log-record--user">{log.user}</span>: <span class="log-record--title">{log.title}</span>:{" "}
-            <span class="log-record--text">{log.text}</span>
+            <div className="log-record--timestamp">⏱️ {formatTimestamp(log.timestamp)}</div>
+            <span className="log-record--user">{log.user}</span>: <span className="log-record--title">{log.title}</span>
+            : <span className="log-record--text">{log.text}</span>
           </div>
         ))}
       </div>
       <div className="grid-full-width">
         <button className="button button-tertiary w-100" onClick={handleReset}>
-          <span class="icon icon-trash"></span>
+          <span className="icon icon-trash"></span>
           Clear logs
         </button>
       </div>
