@@ -1,5 +1,4 @@
 import { UserService } from "./UserService"
-import { NotificationType } from "@mirohq/websdk-types/stable/api/notifications"
 
 export class NotificationService {
   private static instance: NotificationService
@@ -21,7 +20,9 @@ export class NotificationService {
     void miro.board.events.broadcast("message", message)
     void miro.board.notifications.show({
       message: message,
-      type: NotificationType.Info,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      type: "info",
     })
   }
 

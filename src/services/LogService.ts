@@ -1,7 +1,7 @@
 import { getStorage, ICollection } from "./Storage"
 import { UserService } from "./UserService"
 
-type LogRecord = {
+export type LogRecord = {
   title: string
   text: string | number
   timestamp: number
@@ -20,16 +20,23 @@ export class LogService {
   private readonly storage: ICollection
 
   private isStorageSet: boolean = false
+  private handleAddLog: (props: LogRecord) => void = () => {
+    /* noop */
+  }
 
   constructor() {
     this.storage = getStorage(LogService.STORAGE_NAME)
     this.userService = UserService.getInstance()
   }
 
-  onAdd(cb: (messages?: LogStorage) => void) {
-    void this.storage.onValue(LogService.STORAGE_DATA_KEY, cb)
+  onAdd(cb: (messages?: LogRecord) => void) {
+    this.handleAddLog = cb
 
-    return () => this.storage.offValue(LogService.STORAGE_DATA_KEY, cb)
+    return () => {
+      this.handleAddLog = () => {
+        /*noop*/
+      }
+    }
   }
 
   static getInstance(): LogService {
@@ -66,13 +73,16 @@ export class LogService {
       return
     }
 
-    logs.push({
+    const record = {
       ...log,
       user: user.name,
       timestamp: new Date().getTime(),
-    })
+    }
+    logs.push(record)
 
-    await this.storage.set(LogService.STORAGE_DATA_KEY, logs.concat())
+    this.handleAddLog(record)
+
+    await this.storage.set(LogService.STORAGE_DATA_KEY, logs)
   }
 
   async reset(): Promise<this> {

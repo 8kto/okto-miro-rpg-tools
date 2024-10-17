@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "preact/compat"
-import { LogService, LogStorage } from "../../services/LogService"
+import { LogRecord, LogService, LogStorage } from "../../services/LogService"
 
 const formatTimestamp = (timestamp: number) => {
   const date = new Date(timestamp)
@@ -16,9 +16,9 @@ const Log = () => {
   const [messages, setMessages] = useState<LogStorage>([])
   const logRef = useRef<HTMLDivElement>(null)
 
-  const handleAddLog = (messages?: LogStorage) => {
-    if (messages?.length) {
-      setMessages(messages)
+  const handleAddLog = (message?: LogRecord) => {
+    if (message) {
+      setMessages((messages) => messages.concat(message))
     }
   }
 
@@ -45,8 +45,8 @@ const Log = () => {
   return (
     <div className="log-records-wrapper">
       <div ref={logRef} className="log-records-list">
-        {messages.map((log, index) => (
-          <div key={index} className="log-record">
+        {messages.map((log) => (
+          <div key={log.timestamp} className="log-record">
             <div className="log-record--timestamp">⏱️ {formatTimestamp(log.timestamp)}</div>
             <span className="log-record--user">{log.user}</span>: <span className="log-record--title">{log.title}</span>
             : <span className="log-record--text">{log.text}</span>
