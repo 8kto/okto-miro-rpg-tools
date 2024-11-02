@@ -35,11 +35,41 @@ export const secureRandomInteger = (min: number, max: number): number => {
   return min + (randomValue % range)
 }
 
+export const getRandomArrayItem = <T = unknown>(arr: Array<T>): T => {
+  if (!arr.length) {
+    throw new Error("Empty array")
+  }
+
+  return arr[secureRandomInteger(0, arr.length - 1)]
+}
+
+export const getRandomArrayItems = <T = unknown>(arr: Array<T>, count: number): Array<T> => {
+  if (count > arr.length) {
+    throw new Error("Requested more elements than are present in the array")
+  }
+  if (!count) {
+    throw new Error("Count should be more than 0")
+  }
+
+  const result: Array<T> = []
+  const usedIndices = new Set<number>()
+
+  while (result.length < count) {
+    const index = secureRandomInteger(0, arr.length - 1)
+    if (!usedIndices.has(index)) {
+      usedIndices.add(index)
+      result.push(arr[index])
+    }
+  }
+
+  return result
+}
+
 export const roll = (dice = Dice.d100): number => secureRandomInteger(1, dice)
 
-const isDiceRoll = (formula: string): boolean => /^d\d+$/.test(formula.trim())
+const isDiceRoll = (formula: string): boolean => /^\d*d\d+$/.test(formula.trim())
 
-const isInteger = (formula: string): boolean => !Number.isNaN(Number.parseInt(formula.trim(), 10))
+const isInteger = (formula: string): boolean => /^\d+$/.test(formula.trim())
 
 const rollNumberOfDice = (formula: string): number => {
   const [numDice, numSides] = formula.split("d").map(Number)
@@ -101,4 +131,37 @@ export const rollDiceFormula = (formula: string): number => {
   }
 
   return total
+}
+
+type DiceRollResult = [string, number, number[]]
+type DiceRollResultsList = DiceRollResult[]
+
+export const rollDiceFormulaDetailed = (formula: string): DiceRollResultsList => {
+  if (!isValidDiceFormula(formula)) {
+    // throw new Error('Invalid dice formula, allowed characters are +-, numbers and dices (d6 etc.)')
+  }
+
+  const subFormulas = formula.split(",")
+  const res = subFormulas.map((subFormula) => {
+    const tokens = getTokens(subFormula).map(resolveToken) // FIXME
+
+    const res: DiceRollResult = [subFormula, tokens[0] as number, [tokens[0] as number]]
+
+    for (let i = 1; i < tokens.length; i += 2) {
+      const operation = tokens[i] as DiceOperationFn
+      const value = tokens[i + 1] as number
+
+      if (!Number.isInteger(value) || !Number.isInteger(res) || typeof operation !== "function") {
+        console.error({ operation, tokens, total: res, value })
+        throw new Error("Logic error, cannot parse tokens")
+      }
+
+      res[1] = operation(res[1], value)
+      res[2].push(value)
+    }
+
+    return res
+  })
+
+  return res as object as DiceRollResultsList
 }
