@@ -10,11 +10,11 @@ export enum Dice {
 
 type DiceOperationFn = (a: number, b: number) => number
 
-type Operator = '+' | '-'
+type Operator = "+" | "-"
 
 const Operations: Record<Operator, DiceOperationFn> = {
-  '+': (a: number, b: number): number => a + b,
-  '-': (a: number, b: number): number => a - b,
+  "+": (a: number, b: number): number => a + b,
+  "-": (a: number, b: number): number => a - b,
 }
 
 const operationRegExp = /([-+])/
@@ -42,10 +42,10 @@ const isDiceRoll = (formula: string): boolean => /^d\d+$/.test(formula.trim())
 const isInteger = (formula: string): boolean => !Number.isNaN(Number.parseInt(formula.trim(), 10))
 
 const rollNumberOfDice = (formula: string): number => {
-  const [numDice, numSides] = formula.split('d').map(Number)
+  const [numDice, numSides] = formula.split("d").map(Number)
 
   if (isNaN(numDice) || isNaN(numSides)) {
-    throw new Error('Invalid dice formula')
+    throw new Error("Invalid dice formula")
   }
 
   let total = 0
@@ -81,7 +81,7 @@ export const isValidDiceFormula = (formula: string): boolean => {
 
 export const rollDiceFormula = (formula: string): number => {
   if (!isValidDiceFormula(formula)) {
-    throw new Error('Invalid dice formula, allowed characters are +-, numbers and dices (d6 etc.)')
+    throw new Error("Invalid dice formula, allowed characters are +-, numbers and dices (d6 etc.)")
   }
 
   const tokens = getTokens(formula).map(resolveToken)
@@ -92,9 +92,9 @@ export const rollDiceFormula = (formula: string): number => {
     const operation = tokens[i] as DiceOperationFn
     const value = tokens[i + 1] as number
 
-    if (!Number.isInteger(value) || !Number.isInteger(total) || typeof operation !== 'function') {
+    if (!Number.isInteger(value) || !Number.isInteger(total) || typeof operation !== "function") {
       console.error({ operation, tokens, total, value })
-      throw new Error('Logic error, cannot parse tokens')
+      throw new Error("Logic error, cannot parse tokens")
     }
 
     total = operation(total, value)
