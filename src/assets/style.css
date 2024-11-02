@@ -16,6 +16,10 @@ body {
   padding: var(--space-medium);
 }
 
+.m-medium {
+  margin: 1rem;
+}
+
 .mt-medium {
   margin-top: 1rem;
 }
@@ -111,7 +115,7 @@ img {
 .log-records-wrapper {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 70vh;
   padding: 10px;
 }
 
