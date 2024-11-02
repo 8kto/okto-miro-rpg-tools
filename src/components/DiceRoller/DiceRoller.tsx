@@ -1,6 +1,8 @@
 import { DiceAction } from "../../data/dices"
 import { NotificationService } from "../../services/NotificationService"
 import { LogService } from "../../services/LogService"
+import { useState } from "preact/hooks"
+import { rollDiceFormula } from "../../services/diceUtils"
 
 type DiceBarProps = {
   dices: DiceAction[]
@@ -19,9 +21,34 @@ const handleDiceRollAction = (item: DiceAction) => {
   console.log(message)
 }
 
+const handleCustomFormulaEnter = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if ((event as KeyboardEvent).key === "Enter") {
+    const formula = target.value
+    const diceRollResult = rollDiceFormula(formula)
+
+    const message = `Roll (${formula}): ${diceRollResult}`
+
+    void NotificationService.getInstance().showMessageNamed(message)
+    void LogService.getInstance().add({
+      title: `Roll (${formula})`,
+      text: diceRollResult,
+    })
+
+    console.log(message)
+  }
+}
+
 const DiceBar = ({ dices }: DiceBarProps) => {
   const primaryButtons = dices.filter((d) => !d.type || d.type === "primary")
   const secondaryButtons = dices.filter((d) => d.type === "secondary")
+
+  const [customFormula, setCustomFormula] = useState("")
+
+  const handleCustomFormulaChange = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    setCustomFormula(target.value)
+  }
 
   return (
     <>
@@ -50,6 +77,16 @@ const DiceBar = ({ dices }: DiceBarProps) => {
           ))}
         </div>
       )}
+      <div className="form-group m-medium">
+        <input
+          className="input input-small"
+          type="text"
+          placeholder="Custom formula"
+          onChange={handleCustomFormulaChange}
+          onKeyDown={handleCustomFormulaEnter}
+          value={customFormula}
+        />
+      </div>
     </>
   )
 }

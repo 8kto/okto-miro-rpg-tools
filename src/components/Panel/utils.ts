@@ -55,7 +55,7 @@ export const convertImageToToken = async (options?: {
   }
 
   const { title, alt, width, x, y } = selectedImage
-  const tokenUiTitle = title || alt || 'Title'
+  const tokenUiTitle = title || alt || "Title"
 
   if (!tokenUiTitle) {
     console.error("No image title found", selectedImage)
