@@ -14,6 +14,8 @@ export const dices: DiceAction[] = [
   { title: "d12", action: () => roll(Dice.d12) },
   { title: "d20", action: () => roll(Dice.d20) },
   { title: "d100", action: () => roll(Dice.d100) },
+  { title: "d20 + 1", action: () => rollDiceFormula("d20 + 1"), type: "secondary" },
+  { title: "d20 + 4", action: () => rollDiceFormula("d20 + 4"), type: "secondary" },
   { title: "2d20", action: () => rollDiceFormula("2d20"), type: "secondary" },
   { title: "2d6", action: () => rollDiceFormula("2d6"), type: "secondary" },
   {
