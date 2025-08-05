@@ -20,6 +20,10 @@ body {
   margin: 1rem;
 }
 
+.p-medium {
+  padding: 1rem;
+}
+
 .mt-medium {
   margin-top: 1rem;
 }
@@ -46,6 +50,10 @@ body {
 
 .section-header {
   margin-top: 3rem;
+}
+
+.bordered {
+  border: 1px solid #ccc;
 }
 
 /* Grid container for two-column layout */
@@ -153,4 +161,7 @@ img {
 
 .log-record--timestamp .icon {
   color: var(--indigo200) !important;
+}
+
+.tablist--header {
 }
