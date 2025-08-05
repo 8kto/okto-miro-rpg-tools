@@ -7,14 +7,16 @@ import DiceRoller from "./components/DiceRoller/DiceRoller"
 import { dices } from "./data/dices"
 import Log from "./components/Log/Log"
 import About from "./components/About/About"
+import PhasedCombat from "./components/PhasedCombat/PhasedCombat"
 
 export default function App() {
   return (
     <div id="root">
-      <Tabs defaultIndex={1}>
-        <TabList>
+      <Tabs defaultIndex={2}>
+        <TabList className="tablist--header">
           <Tab>Tokens</Tab>
           <Tab>Dice roller</Tab>
+          <Tab>Combat</Tab>
           <Tab>About</Tab>
         </TabList>
 
@@ -24,6 +26,9 @@ export default function App() {
         <TabPanel forceRender>
           <DiceRoller dices={dices} />
           <Log />
+        </TabPanel>
+        <TabPanel forceRender>
+          <PhasedCombat />
         </TabPanel>
         <TabPanel>
           <About />
