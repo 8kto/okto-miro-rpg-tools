@@ -14,7 +14,7 @@ const handleDiceRollAction = (item: DiceAction) => {
 
   void NotificationService.getInstance().showMessageNamed(message)
   void LogService.getInstance().add({
-    title: `Roll (${item.title})`,
+    title: `(${item.title})`,
     text: diceRollResult,
   })
 

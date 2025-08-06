@@ -12,13 +12,15 @@ import PhasedCombat from "./components/PhasedCombat/PhasedCombat"
 export default function App() {
   return (
     <div id="root">
-      <Tabs defaultIndex={2}>
+      <Tabs defaultIndex={1}>
         <TabList className="tablist--header">
           <Tab>Tokens</Tab>
           <Tab>Dice roller</Tab>
           <Tab>Combat</Tab>
           <Tab>About</Tab>
         </TabList>
+
+        <hr />
 
         <TabPanel forceRender>
           <TokenPanel />

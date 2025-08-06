@@ -34,7 +34,7 @@ const PhasedCombat = () => {
   }
 
   return (
-    <div className="grid-full-width">
+    <div className="grid-full-width okto-ttrpg-phased-combat-panel">
       <button disabled={busy} className="button button-secondary w-100" onClick={nextPhase}>
         {">>>"} Next phase
       </button>
@@ -44,10 +44,10 @@ const PhasedCombat = () => {
         {PHASES[phaseIndex] && <p>{PHASES[phaseIndex].description}</p>}
       </div>
 
-      <button className="button button-primary w-100" onClick={createSticker}>
+      <button className="button button-danger w-100" onClick={createSticker}>
         Create Combat Sticker
       </button>
-      <button className="button button-danger w-100" onClick={reset}>
+      <button className="button button-secondary w-100" onClick={reset}>
         Reset
       </button>
     </div>

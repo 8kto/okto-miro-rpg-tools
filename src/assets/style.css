@@ -119,6 +119,10 @@ img {
   margin: 0 !important;
 }
 
+.button--dice-roller.button-danger {
+  background: chocolate;
+}
+
 /* LOGS */
 .log-records-wrapper {
   display: flex;
@@ -164,4 +168,23 @@ img {
 }
 
 .tablist--header {
+  padding: 0;
+}
+
+.tablist--header .react-tabs__tab {
+  bottom: 0;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  margin: 0 3px 3px;
+  background: aliceblue;
+}
+
+.tablist--header .react-tabs__tab--selected {
+  border: none;
+  background: antiquewhite;
+}
+
+.okto-ttrpg-phased-combat-panel .button-danger {
+  background: chocolate;
+  border: none;
 }
