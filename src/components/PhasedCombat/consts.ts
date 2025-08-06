@@ -17,3 +17,6 @@ export const PHASES: Array<CombatPhase> = [
   { title: "Изгнание нежити", description: "Проверка изгнания по таблице" },
   { title: "Стрельба 2-й раз", description: "Луки стреляют 2-й раз, дротики 3-й, ЕСЛИ персонажи не двигались" },
 ]
+
+export const PCOMBAT_STICKER_TAG = "⚔️"
+export const PCOMBAT_DEFAULT_TITLE = "Here comes the battle"

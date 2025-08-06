@@ -1,19 +1,16 @@
 import type { StickyNote } from "@mirohq/websdk-types/stable/features/widgets/stickyNote"
 import type { Tag } from "@mirohq/websdk-types/stable/features/widgets/tag"
-import { PHASES } from "./consts"
+import { PCOMBAT_DEFAULT_TITLE, PCOMBAT_STICKER_TAG, PHASES } from "./consts"
 
 const { board } = miro
 
-export const PCOMBAT_STICKER_TAG = "phasedCombatTag"
-export const PCOMBAT_DEFAULT_TITLE = "Here comes the battle"
-
 const getStickerSide = async () => {
-  const viewport = await board.viewport.get() // contains width, height, x, y
+  const viewport = await board.viewport.get()
 
   const screenWidthPx = viewport.width
   const stickyBoardWidth = screenWidthPx * 0.05
 
-  return Math.min(stickyBoardWidth, 1500)
+  return Math.min(stickyBoardWidth, 2000)
 }
 
 const getCombatSticker = async (): Promise<StickyNote | null> => {
@@ -39,18 +36,22 @@ const getCombatTag = async (): Promise<Tag | null> => {
   return null
 }
 
-export const createSticker = async () => {
-  // Get the current viewport to determine the center position
+const getCenterCoords = async () => {
   const viewport = await board.viewport.get()
-  const centerX = viewport.x + viewport.width / 2
-  const centerY = viewport.y + viewport.height / 2
+  const x = viewport.x + viewport.width / 2
+  const y = viewport.y + viewport.height / 2
 
+  return { x, y }
+}
+
+export const createSticker = async (): Promise<StickyNote> => {
+  const { x, y } = await getCenterCoords()
   const existingSticker = await getCombatSticker()
 
   if (existingSticker) {
     await miro.board.select({ id: existingSticker.id })
 
-    return
+    return existingSticker
   }
 
   const existingTag = await getCombatTag()
@@ -60,6 +61,7 @@ export const createSticker = async () => {
   } else {
     tag = await miro.board.createTag({
       title: PCOMBAT_STICKER_TAG,
+      color: "blue",
     })
   }
 
@@ -67,8 +69,8 @@ export const createSticker = async () => {
   const sticker = await board.createStickyNote({
     content: PCOMBAT_DEFAULT_TITLE,
     shape: "rectangle",
-    x: centerX,
-    y: centerY,
+    x,
+    y,
     width: await getStickerSide(),
     tagIds: [tag.id],
     style: {
@@ -83,6 +85,8 @@ export const createSticker = async () => {
   await miro.board.viewport.setZoom(0.1)
 
   console.debug("Sticker created:", await miro.board.getById(sticker.id))
+
+  return sticker
 }
 
 export const updateStickerText = async (text: string) => {

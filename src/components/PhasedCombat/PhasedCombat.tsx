@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks"
-import { createSticker, getPhaseTitle, PCOMBAT_DEFAULT_TITLE, updateStickerText } from "./utils"
-import { PHASES } from "./consts"
+import { createSticker, getPhaseTitle, updateStickerText } from "./utils"
+import { PCOMBAT_DEFAULT_TITLE, PHASES } from "./consts"
 
 const PhasedCombat = () => {
   const [roundNum, setRoundNum] = useState(1)
