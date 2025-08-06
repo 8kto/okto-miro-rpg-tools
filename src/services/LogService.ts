@@ -20,7 +20,7 @@ export class LogService {
   private readonly storage: ICollection
 
   private isStorageSet: boolean = false
-  private handleAddLog: (props: LogRecord) => void = () => {
+  private handleAddLog: (records?: LogRecord[]) => void = () => {
     /* noop */
   }
 
@@ -29,8 +29,9 @@ export class LogService {
     this.userService = UserService.getInstance()
   }
 
-  onAdd(cb: (messages?: LogRecord) => void) {
+  onAdd(cb: (messages?: LogRecord[]) => void) {
     this.handleAddLog = cb
+    void this.storage.onValue(LogService.STORAGE_DATA_KEY, this.handleAddLog)
 
     return () => {
       this.handleAddLog = () => {
@@ -80,8 +81,6 @@ export class LogService {
     }
     logs.push(record)
 
-    this.handleAddLog(record)
-
     await this.storage.set(LogService.STORAGE_DATA_KEY, logs)
   }
 
@@ -89,5 +88,11 @@ export class LogService {
     await this.storage.set(LogService.STORAGE_DATA_KEY, [])
 
     return this
+  }
+
+  async getLogs(): Promise<LogStorage> {
+    const logs = await this.storage.get<LogStorage>(LogService.STORAGE_DATA_KEY)
+
+    return (logs || []) as LogStorage
   }
 }
