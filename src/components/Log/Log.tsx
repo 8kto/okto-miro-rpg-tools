@@ -17,7 +17,7 @@ const Log = () => {
   const logRef = useRef<HTMLDivElement>(null)
 
   const handleAddLog = (messages?: LogRecord[]) => {
-    if (messages?.length) {
+    if (Array.isArray(messages)) {
       setMessages(messages)
     }
   }
