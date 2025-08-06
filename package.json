@@ -9,7 +9,8 @@
     "dev": "preact watch -p 3000 --template src/index.html",
     "update-token-exports": "scripts/update-token-exports.sh",
     "format:fix": "yarn lint --fix; npx prettier --write src",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
     "mirotone": "5",
