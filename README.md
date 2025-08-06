@@ -7,6 +7,7 @@ sessions.
 
 - Drag-and-drop RPG tokens
 - Dice roller
+- Phased combat tracker
 
 ## Installation
 
@@ -40,6 +41,5 @@ For full license details, see the [LICENSE.md](./LICENSE.md) file.
 Contributions are welcome! Please feel free to submit pull requests, open issues, or suggest features.
 
 ## TODO
-- Dice rolls, custom formulas
 - Custom context actions (https://developers.miro.com/docs/add-custom-actions-to-your-app)
 - Docker image to run locally

@@ -20,6 +20,10 @@ body {
   margin: 1rem;
 }
 
+.p-medium {
+  padding: 1rem;
+}
+
 .mt-medium {
   margin-top: 1rem;
 }
@@ -46,6 +50,10 @@ body {
 
 .section-header {
   margin-top: 3rem;
+}
+
+.bordered {
+  border: 1px solid #ccc;
 }
 
 /* Grid container for two-column layout */
@@ -111,6 +119,10 @@ img {
   margin: 0 !important;
 }
 
+.button--dice-roller.button-danger {
+  background: chocolate;
+}
+
 /* LOGS */
 .log-records-wrapper {
   display: flex;
@@ -153,4 +165,26 @@ img {
 
 .log-record--timestamp .icon {
   color: var(--indigo200) !important;
+}
+
+.tablist--header {
+  padding: 0;
+}
+
+.tablist--header .react-tabs__tab {
+  bottom: 0;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  margin: 0 3px 3px;
+  background: aliceblue;
+}
+
+.tablist--header .react-tabs__tab--selected {
+  border: none;
+  background: antiquewhite;
+}
+
+.okto-ttrpg-phased-combat-panel .button-danger {
+  background: chocolate;
+  border: none;
 }

@@ -1,7 +1,7 @@
 {
   "name": "okto-miro",
   "version": "0.1.0",
-  "license": "MIT",
+  "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "scripts": {
     "build": "preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
     "serve:prod": "sirv dist -p 3000 --cors --single --host 0.0.0.0",
