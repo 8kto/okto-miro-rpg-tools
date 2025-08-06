@@ -16,9 +16,9 @@ const Log = () => {
   const [messages, setMessages] = useState<LogStorage>([])
   const logRef = useRef<HTMLDivElement>(null)
 
-  const handleAddLog = (message?: LogRecord) => {
-    if (message) {
-      setMessages((messages) => messages.concat(message))
+  const handleAddLog = (messages?: LogRecord[]) => {
+    if (messages?.length) {
+      setMessages(messages)
     }
   }
 
@@ -35,7 +35,10 @@ const Log = () => {
   }, [messages])
 
   useEffect(() => {
-    const cleanup = LogService.getInstance().onAdd(handleAddLog)
+    const logService = LogService.getInstance()
+    const cleanup = logService.onAdd(handleAddLog)
+
+    logService.getLogs().then((logs) => setMessages(logs))
 
     return () => {
       void cleanup()

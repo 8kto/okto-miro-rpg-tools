@@ -34,6 +34,7 @@ export class LogService {
     void this.storage.onValue(LogService.STORAGE_DATA_KEY, this.handleAddLog)
 
     return () => {
+      void this.storage.offValue(LogService.STORAGE_DATA_KEY, this.handleAddLog)
       this.handleAddLog = () => {
         /*noop*/
       }
