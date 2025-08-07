@@ -188,3 +188,25 @@ img {
   background: chocolate;
   border: none;
 }
+
+.phased-list {
+  padding-left: 2rem;
+}
+
+.phased-list li {
+  padding: 0.25rem;
+}
+
+.phased-list-item-0,
+.phased-list-item-1,
+.phased-list-item-2 {
+  font-style: italic;
+}
+
+.phased-list-item-3 {
+  font-weight: bold;
+}
+
+.phased-list .active {
+  background: antiquewhite;
+}
