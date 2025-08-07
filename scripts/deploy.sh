@@ -22,7 +22,13 @@ fi
 yarn build
 mkdir -p /tmp/okto-miro-rpg-tools-to-be-deployed
 rm -rf /tmp/okto-miro-rpg-tools-to-be-deployed/*
-rsync -av --exclude='*.test.ts' --exclude='*.test.ts.snap' dist/ /tmp/okto-miro-rpg-tools-to-be-deployed
+rsync \
+  -av \
+  --exclude='*.test.ts' \
+  --exclude='*.test.ts.snap' \
+  --exclude='*.map' \
+  dist/ \
+  /tmp/okto-miro-rpg-tools-to-be-deployed
 
 # Deploy to remote server
 echo "DEPLOY_SSH_PORT: $DEPLOY_SSH_PORT"
