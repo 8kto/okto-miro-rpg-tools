@@ -39,6 +39,15 @@ const PhasedCombat = () => {
         {">>>"} Next phase
       </button>
 
+      <h4>Round {roundNum}</h4>
+      <ul className="phased-list">
+        {PHASES.map((phase, index) => (
+          <li key={phase.title} className={`phased-list-item-` + index + " " + (index === phaseIndex ? "active" : "")}>
+            {phase.title}
+          </li>
+        ))}
+      </ul>
+
       <div className="bordered p-medium my-medium">
         <h3>{getPhaseTitle(roundNum, phaseIndex)}</h3>
         {PHASES[phaseIndex] && <p>{PHASES[phaseIndex].description}</p>}

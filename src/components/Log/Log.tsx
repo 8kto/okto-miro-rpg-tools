@@ -3,13 +3,20 @@ import { LogRecord, LogService, LogStorage } from "../../services/LogService"
 
 const formatTimestamp = (timestamp: number) => {
   const date = new Date(timestamp)
-  return date.toLocaleTimeString("en-GB", {
-    // 'en-GB' uses 24-hour format
+
+  const time = date.toLocaleTimeString("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     hour12: false,
   })
+
+  const shortDate = date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+  })
+
+  return `${shortDate}, ${time}`
 }
 
 const Log = () => {
