@@ -1,4 +1,4 @@
-import { Dice, roll, rollDiceFormula } from "../services/diceUtils"
+import { Dice, roll, rollDiceFormula } from "ttrpg-lib-dice"
 
 export type DiceAction = {
   title: string
