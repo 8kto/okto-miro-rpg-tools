@@ -9537,6 +9537,11 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
+ttrpg-lib-dice@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/ttrpg-lib-dice/-/ttrpg-lib-dice-1.0.12.tgz#92d1eeec936a1d48c8c91cf4b78d3521ca009077"
+  integrity sha512-WvtEDzPmgFOdLaEPO4HThzY3rNHe3rT2QUYHzv8a1k9jjXrgGVMiu3+sTQJdPO/xQmb+M0WAwxw/zdVScV5aKA==
+
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"

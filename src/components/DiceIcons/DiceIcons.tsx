@@ -1,4 +1,4 @@
-import { Dice } from "../../services/diceUtils"
+import { Dice } from "ttrpg-lib-dice"
 
 const DiceIcons = {
   [Dice.d4]: (
