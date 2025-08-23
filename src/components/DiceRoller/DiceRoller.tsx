@@ -2,7 +2,7 @@ import { DiceAction } from "../../data/dices"
 import { NotificationService } from "../../services/NotificationService"
 import { LogService } from "../../services/LogService"
 import { useState } from "preact/hooks"
-import { rollDiceFormula } from "../../services/diceUtils"
+import { rollDiceFormula } from "ttrpg-lib-dice"
 
 type DiceBarProps = {
   dices: DiceAction[]
