@@ -28,3 +28,5 @@ size-plugin.json
 src/images/tokens/
 src/images/tokens
 src/data/tokenAutoExports.ts
+.env.production.local
+.env.local
