@@ -5,7 +5,7 @@ const About = () => {
 
   return (
     <>
-      {version && (<p>Version: {version}</p>)}
+      {version && <p>Version: {version}</p>}
       <p>
         2024-2025{" "}
         <a
@@ -37,7 +37,7 @@ const About = () => {
         </a>
         )
       </p>
-      {tokenCredits && (<p>{tokenCredits}</p> )}
+      {tokenCredits && <p>{tokenCredits}</p>}
       <p>
         Licensed under{" "}
         <a
