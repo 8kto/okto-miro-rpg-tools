@@ -3,10 +3,10 @@
   "version": "1.0.1",
   "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "scripts": {
-    "build": "dotenv -e .env.local -- preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
+    "build": "./scripts/extract-version.sh dotenv -e .env.local -- preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
     "serve:prod": "sirv dist -p 3000 --cors --single --host 0.0.0.0",
     "serve:dev": "preact watch -p 3000 --template src/index.html",
-    "dev": "dotenv -e .env.local -- preact watch -p 3000 --template src/index.html",
+    "dev": "./scripts/extract-version.sh dotenv -e .env.local -- preact watch -p 3000 --template src/index.html",
     "update-token-exports": "scripts/update-token-exports.sh",
     "format:fix": "yarn lint --fix; npx prettier --write src",
     "lint": "eslint",
