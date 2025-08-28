@@ -1,6 +1,6 @@
 {
   "name": "okto-miro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "scripts": {
     "build": "dotenv -e .env.local -- preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
