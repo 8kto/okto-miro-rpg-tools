@@ -1,12 +1,12 @@
 {
   "name": "okto-miro",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "scripts": {
-    "build": "preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
+    "build": "./scripts/extract-version.sh dotenv -e .env.local -- preact build --no-prerender --no-sw --template src/index.html --dest ./dist",
     "serve:prod": "sirv dist -p 3000 --cors --single --host 0.0.0.0",
     "serve:dev": "preact watch -p 3000 --template src/index.html",
-    "dev": "preact watch -p 3000 --template src/index.html",
+    "dev": "./scripts/extract-version.sh dotenv -e .env.local -- preact watch -p 3000 --template src/index.html",
     "update-token-exports": "scripts/update-token-exports.sh",
     "format:fix": "yarn lint --fix; npx prettier --write src",
     "lint": "eslint",
@@ -25,6 +25,7 @@
     "@eslint/js": "^9.12.0",
     "@mirohq/websdk-types": "latest",
     "@types/throttle-debounce": "^5.0.2",
+    "dotenv-cli": "^10.0.0",
     "eslint": "^9.12.0",
     "eslint-plugin-react": "^7.37.1",
     "globals": "^15.11.0",
