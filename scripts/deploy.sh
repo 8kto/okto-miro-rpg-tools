@@ -2,7 +2,7 @@
 
 # Load environment variables from .env.local
 if [ -f .env.development.local ]; then
-  export $(grep -v '^#' .env.development.local | xargs)
+  export $(grep -v '^#' .env.production.local | xargs)
 else
   echo "No .env.development.local found"
   exit 1
