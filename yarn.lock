@@ -11709,10 +11709,10 @@ tslib@^2.4.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
-ttrpg-lib-dice@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ttrpg-lib-dice/-/ttrpg-lib-dice-2.0.2.tgz#745221078eae21d7203f1bee5f80c3908fc297a6"
-  integrity sha512-LUEb07cPvPfs5QV6V+qb5SwiaTdhiE5ZSZ2j7l6F+bIxO2C9cCWCCi9v0PllayAE8xivGDpFV2QtZAhyEHPPjw==
+ttrpg-lib-dice@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/ttrpg-lib-dice/-/ttrpg-lib-dice-2.0.3.tgz#3518f0b88a2658584b0610809912345cf5020674"
+  integrity sha512-aWmWszEmgltowufKWX3oy9Iqu8iwa1A/Evdlb15d9TwB8ES7rebAF5xnOf6zKR0k1hICR2wv8bgZmlOEYTCVKg==
 
 tty-browserify@0.0.0:
   version "0.0.0"
