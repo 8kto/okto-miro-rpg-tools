@@ -1,12 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Load environment variables from .env.local
-if [ -f .env.development.local ]; then
-  export $(grep -v '^#' .env.production.local | xargs)
+# Load environment variables
+ENV_FILE=".env.production.local"
+
+# Load environment variables from .env.production.local
+if [[ -f "$ENV_FILE" ]]; then
+  # Export all variables defined while sourcing
+  set -a
+  # shellcheck disable=SC1090
+  . "$ENV_FILE"
+  set +a
 else
-  echo "No .env.development.local found"
+  echo "No $ENV_FILE found" >&2
   exit 1
 fi
+
+env | grep PREACT
 
 # Get the current git branch
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)

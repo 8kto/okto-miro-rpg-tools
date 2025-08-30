@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 # Navigate to the project root (assumes 'scripts' is at the same level as 'src')
 cd "$(dirname "$0")/.."
