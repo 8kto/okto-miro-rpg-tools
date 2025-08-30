@@ -7,6 +7,9 @@
     "serve:prod": "sirv dist -p 3000 --cors --single --host 0.0.0.0",
     "serve:dev": "preact watch -p 3000 --template src/index.html",
     "dev": "./scripts/extract-version.sh dotenv -e .env.local -- preact watch -p 3000 --template src/index.html",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "update-token-exports": "scripts/update-token-exports.sh",
     "format:fix": "yarn lint --fix; npx prettier --write src",
     "lint": "eslint",
@@ -24,13 +27,20 @@
   "devDependencies": {
     "@eslint/js": "^9.12.0",
     "@mirohq/websdk-types": "latest",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/preact": "^3.2.4",
+    "@types/jest": "^30.0.0",
     "@types/throttle-debounce": "^5.0.2",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.12.0",
     "eslint-plugin-react": "^7.37.1",
     "globals": "^15.11.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.1.1",
+    "jest-environment-jsdom": "^30.1.1",
     "preact-cli": "^3.0.0",
     "sirv-cli": "1.0.3",
+    "ts-jest": "^29.4.1",
     "typescript-eslint": "^8.9.0"
   }
 }
