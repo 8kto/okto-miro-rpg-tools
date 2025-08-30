@@ -134,7 +134,7 @@ const TokenPanel = () => {
         </div>
       </details>
 
-      <div className="grid-full-width">
+      <div className="grid-full-width" hidden>
         <button
           className="button button-primary w-100"
           onClick={() =>
