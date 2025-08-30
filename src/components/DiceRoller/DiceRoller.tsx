@@ -1,41 +1,28 @@
 import { DiceAction } from "../../data/dices"
-import { NotificationService } from "../../services/NotificationService"
-import { LogService } from "../../services/LogService"
 import { useState } from "preact/hooks"
-import { rollDiceFormula } from "ttrpg-lib-dice"
+import { rollDiceFormulaDetailed } from "ttrpg-lib-dice"
+import { formatDiceRollResult } from "../../utils/format"
+import { broadcastDiceRollResult, getPrefixedResult } from "./utils"
 
 type DiceBarProps = {
   dices: DiceAction[]
 }
 
 const handleDiceRollAction = (item: DiceAction) => {
-  const diceRollResult = item.action()
-  const message = `Roll (${item.title}): ${diceRollResult}`
+  const formula = item.title
+  const text = getPrefixedResult(...item.action())
 
-  void NotificationService.getInstance().showMessageNamed(message)
-  void LogService.getInstance().add({
-    title: `(${item.title})`,
-    text: diceRollResult,
-  })
-
-  console.log(message)
+  broadcastDiceRollResult(formula, text)
 }
 
 const handleCustomFormulaEnter = (event: Event) => {
   const target = event.target as HTMLInputElement
   if ((event as KeyboardEvent).key === "Enter") {
     const formula = target.value
-    const diceRollResult = rollDiceFormula(formula)
+    const res = rollDiceFormulaDetailed(formula)
+    const text = getPrefixedResult(res.total, formatDiceRollResult(res))
 
-    const message = `Roll (${formula}): ${diceRollResult}`
-
-    void NotificationService.getInstance().showMessageNamed(message)
-    void LogService.getInstance().add({
-      title: `Roll (${formula})`,
-      text: diceRollResult,
-    })
-
-    console.log(message)
+    broadcastDiceRollResult(formula, text)
   }
 }
 

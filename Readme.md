@@ -1,7 +1,7 @@
 # Okto Miro RPG Tools
 
 **Okto Miro RPG Tools** is a free plugin for [Miro](https://miro.com/) designed to enhance role-playing game (RPG)
-sessions.
+sessions. Uses [ttrpg-lib-dice](https://github.com/8kto/ttrpg-lib-dice) library to roll dice. 
 
 ## Features
 

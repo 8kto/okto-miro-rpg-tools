@@ -58,8 +58,8 @@ const Log = () => {
         {messages.map((log) => (
           <div key={log.timestamp} className="log-record">
             <div className="log-record--timestamp">⏱️ {formatTimestamp(log.timestamp)}</div>
-            <span className="log-record--user">{log.user}</span>: <span className="log-record--title">{log.title}</span>
-            : <span className="log-record--text">{log.text}</span>
+            <div className="log-record--user">{log.user}</div>
+            <span className="log-record--title">{log.title}</span>: <span className="log-record--text">{log.text}</span>
           </div>
         ))}
       </div>
