@@ -9,7 +9,7 @@ export const formatDiceRollResult = (diceRoll: DiceRollResults): string => {
     const group = groups[i]
     const token = group.formula.trim()
     const isDice = token.toLowerCase().includes("d")
-    const sign = i === 0 ? "" : ( token.startsWith("-") ? "-" : "+" )
+    const sign = i === 0 ? "" : token.startsWith("-") ? "-" : "+"
     const prefix = i === 0 ? "" : ` ${sign} `
 
     if (!isDice) {
@@ -19,8 +19,8 @@ export const formatDiceRollResult = (diceRoll: DiceRollResults): string => {
     }
 
     // Dice term: show individual rolls as absolute values
-    const rolls = group.rolls.map(v => Math.abs(v))
-    const body = rolls.join(', ')
+    const rolls = group.rolls.map((v) => Math.abs(v))
+    const body = rolls.join(", ")
 
     // Parenthesize only if multiple groups overall AND this group has >1 entries
     const withParens = hasManyGroups && rolls.length > 1 ? `(${body})` : body

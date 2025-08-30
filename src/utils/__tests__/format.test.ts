@@ -64,11 +64,13 @@ describe("format utils", () => {
             formula: "5d20",
             rolls: [3, 1, 16, 20, 9],
             total: 49,
-          },{
+          },
+          {
             formula: "+d6",
             rolls: [3],
             total: 3,
-          },{
+          },
+          {
             formula: "+1",
             rolls: [1],
             total: 1,
@@ -88,11 +90,13 @@ describe("format utils", () => {
             formula: "5d20",
             rolls: [3, 1, 16, 20, 9],
             total: 49,
-          },{
+          },
+          {
             formula: "+2d6",
             rolls: [3, 6],
             total: 9,
-          },{
+          },
+          {
             formula: "+1",
             rolls: [1],
             total: 1,
@@ -112,11 +116,13 @@ describe("format utils", () => {
             formula: "5d20",
             rolls: [3, 1, 16, 20, 9],
             total: 49,
-          },{
+          },
+          {
             formula: "-2d6",
             rolls: [3, 6],
             total: -9,
-          },{
+          },
+          {
             formula: "-1",
             rolls: [1],
             total: -1,
@@ -124,6 +130,71 @@ describe("format utils", () => {
         ],
       }),
     ).toBe("(3, 1, 16, 20, 9) - (3, 6) - 1")
+  })
+
+  it("does not parenthesize when there is only one group with multiple dice (2d6)", () => {
+    expect(
+      formatDiceRollResult({
+        formula: "2d6",
+        total: 9,
+        rolls: [{ formula: "2d6", rolls: [3, 6], total: 9 }],
+      }),
+    ).toBe("3, 6")
+  })
+
+  it("does not parenthesize single-die groups even when there are multiple groups (d6 + d6)", () => {
+    expect(
+      formatDiceRollResult({
+        formula: "d6 + d6",
+        total: 7,
+        rolls: [
+          { formula: "d6", rolls: [3], total: 3 },
+          { formula: "+d6", rolls: [4], total: 4 },
+        ],
+      }),
+    ).toBe("3 + 4")
+  })
+
+  it("parenthesizes only the groups with >1 entries when multiple groups exist (2d6 + d4)", () => {
+    expect(
+      formatDiceRollResult({
+        formula: "2d6 + d4",
+        total: 13,
+        rolls: [
+          { formula: "2d6", rolls: [3, 6], total: 9 },
+          { formula: "+d4", rolls: [4], total: 4 },
+        ],
+      }),
+    ).toBe("(3, 6) + 4")
+  })
+
+  it("parenthesizes the second group if it has >1 entries (d4 + 2d6)", () => {
+    expect(
+      formatDiceRollResult({
+        formula: "d4 + 2d6",
+        total: 13,
+        rolls: [
+          { formula: "d4", rolls: [4], total: 4 },
+          { formula: "+2d6", rolls: [3, 6], total: 9 },
+        ],
+      }),
+    ).toBe("4 + (3, 6)")
+  })
+
+  it("handles a longer mixed chain with signs", () => {
+    expect(
+      formatDiceRollResult({
+        formula: "d6 - d6 + 2d6 - 1 + d4",
+        total: 13,
+        rolls: [
+          { formula: "d6", rolls: [3], total: 3 },
+          { formula: "-d6", rolls: [-4], total: -4 },
+          { formula: "+2d6", rolls: [5, 6], total: 11 },
+          { formula: "-1", rolls: [-1], total: -1 },
+          { formula: "+d4", rolls: [4], total: 4 },
+        ],
+      }),
+    ).toBe("3 - 4 + (5, 6) - 1 + 4")
   })
 })
 
