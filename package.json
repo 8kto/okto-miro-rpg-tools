@@ -18,7 +18,7 @@
     "preact-render-to-string": "^5.1.4",
     "react-tabs": "^6.0.2",
     "throttle-debounce": "^5.0.2",
-    "ttrpg-lib-dice": "^1.0.12",
+    "ttrpg-lib-dice": "^2.0.2",
     "typescript": "4.9.5"
   },
   "devDependencies": {
