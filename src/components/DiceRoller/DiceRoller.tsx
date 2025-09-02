@@ -64,7 +64,7 @@ const DiceBar = ({ dices }: DiceBarProps) => {
           ))}
         </div>
       )}
-      <div className="form-group m-medium">
+      <div className="form-group m-medium mb-0">
         <input
           className="input input-small"
           type="text"
@@ -72,6 +72,7 @@ const DiceBar = ({ dices }: DiceBarProps) => {
           onChange={handleCustomFormulaChange}
           onKeyDown={handleCustomFormulaEnter}
           value={customFormula}
+          autoComplete="on"
         />
       </div>
     </>

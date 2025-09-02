@@ -38,6 +38,14 @@ body {
   padding-bottom: 1rem;
 }
 
+.mb-small {
+  margin-bottom: 0.5rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
 .space-y-1 > * {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -127,7 +135,7 @@ img {
 .log-records-wrapper {
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: 68vh;
   padding: 10px;
 }
 
@@ -141,6 +149,7 @@ img {
 }
 
 .log-record {
+  font-size: 15px;
   margin-bottom: 0.25rem;
   padding: 0.25rem;
 }
@@ -150,6 +159,7 @@ img {
 }
 
 .log-record--user {
+  font-size: 12px;
   color: var(--green700);
 }
 
@@ -160,7 +170,7 @@ img {
 .log-record--timestamp {
   display: flex;
   color: var(--indigo200);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .log-record--timestamp .icon {
