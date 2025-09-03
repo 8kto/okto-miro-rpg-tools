@@ -1,0 +1,25 @@
+.tablist--header {
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tablist--header .react-tabs__tab {
+  align-items: center;
+  bottom: 0;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  margin: 0 3px 0 0;
+  background: aliceblue;
+  font-size: 15px;
+  /*padding: 0.5rem 0.46rem;*/
+  padding: 8px 10px;
+  /*font-weight: bold;*/
+}
+
+.tablist--header .react-tabs__tab--selected {
+  border: 1px solid transparent;
+}
