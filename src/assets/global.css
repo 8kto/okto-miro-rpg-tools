@@ -13,10 +13,15 @@ img {
   height: auto;
 }
 
+hr {
+  border: 1px solid #eaeaea;
+  margin: 1rem 0;
+}
+
 #root {
   width: 100%;
   overflow: auto;
-  padding: var(--space-medium);
+  padding: 15px;
 }
 
 .m-medium {

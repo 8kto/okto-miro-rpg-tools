@@ -2,8 +2,8 @@
 .log-records-wrapper {
   display: flex;
   flex-direction: column;
-  height: 68vh;
-  padding: 10px;
+  height: 75vh;
+  padding: 10px 0;
 }
 
 .log-records-list {
@@ -26,7 +26,7 @@
 }
 
 .log-record--user {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--green700);
 }
 
