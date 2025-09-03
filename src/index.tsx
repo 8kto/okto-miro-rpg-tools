@@ -1,7 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import "react-tabs/style/react-tabs.css"
 
-import "/assets/style.css"
+import "/assets/index.css"
 import TokenPanel from "./components/Panel/TokenPanel"
 import DiceRoller from "./components/DiceRoller/DiceRoller"
 import { dices } from "./data/dices"
