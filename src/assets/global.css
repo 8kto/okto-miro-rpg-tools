@@ -1,0 +1,68 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#root {
+  width: 100%;
+  overflow: auto;
+  padding: var(--space-medium);
+}
+
+.m-medium {
+  margin: 1rem;
+}
+
+.p-medium {
+  padding: 1rem;
+}
+
+.mt-medium {
+  margin-top: 1rem;
+}
+
+.my-medium {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.py-medium {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.mb-small {
+  margin-bottom: 0.5rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.space-y-1 > * {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.w-100 {
+  width: 100%;
+  min-width: 100%;
+}
+
+.section-header {
+  margin-top: 3rem;
+}
+
+.bordered {
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,45 @@
+/* LOGS */
+.log-records-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 68vh;
+  padding: 10px;
+}
+
+.log-records-list {
+  flex-grow: 1;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.log-record {
+  font-size: 15px;
+  margin-bottom: 0.25rem;
+  padding: 0.25rem;
+}
+
+.log-record:nth-child(even) {
+  background-color: var(--indigo50);
+}
+
+.log-record--user {
+  font-size: 12px;
+  color: var(--green700);
+}
+
+.log-record--title {
+  color: gray;
+}
+
+.log-record--timestamp {
+  display: flex;
+  color: var(--indigo200);
+  font-size: 12px;
+}
+
+.log-record--timestamp .icon {
+  color: var(--indigo200) !important;
+}
