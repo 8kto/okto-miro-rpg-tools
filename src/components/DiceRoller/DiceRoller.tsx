@@ -152,7 +152,7 @@ const DiceBar = ({ dices }: DiceBarProps) => {
           <button
             key={index}
             onClick={() => handleDiceRollAction(diceAction)}
-            className="diceui-btn diceui-btn--primary"
+            className="miro-btn miro-btn--primary"
             title={`Roll ${diceAction.title}`}
           >
             {diceAction.title}
@@ -166,7 +166,7 @@ const DiceBar = ({ dices }: DiceBarProps) => {
             <button
               key={index}
               onClick={() => handleDiceRollAction(diceAction)}
-              className="diceui-btn diceui-chip"
+              className="miro-btn"
               title={`Roll ${diceAction.title}`}
             >
               {diceAction.title}
@@ -194,7 +194,7 @@ const DiceBar = ({ dices }: DiceBarProps) => {
         />
 
         <button
-          className="diceui-action"
+          className="miro-btn diceui-action"
           onClick={() => {
             rollNow(customFormula)
             setHistoryIndex(-1)
@@ -208,7 +208,7 @@ const DiceBar = ({ dices }: DiceBarProps) => {
 
         <div className="diceui-historywrap" ref={historyRef}>
           <button
-            className="diceui-action diceui-action--ghost"
+            className="miro-btn diceui-action diceui-action--ghost"
             onClick={() => setIsHistoryOpen((v) => !v)}
             aria-haspopup="listbox"
             aria-expanded={isHistoryOpen}
