@@ -3,14 +3,14 @@
   display: flex;
   flex-direction: column;
   height: 75vh;
-  padding: 10px 0;
+  padding: 0;
 }
 
 .log-records-list {
   flex-grow: 1;
   overflow-y: scroll;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 0;
   margin: 10px 0;
   font-size: 18px;
 }
@@ -27,16 +27,16 @@
 
 .log-record--user {
   font-size: 14px;
-  color: var(--green700);
+  color: #618ed7;
 }
 
 .log-record--title {
-  color: gray;
+  color: #64748b;
 }
 
 .log-record--timestamp {
   display: flex;
-  color: var(--indigo200);
+  color: #9ca3af;
   font-size: 12px;
 }
 

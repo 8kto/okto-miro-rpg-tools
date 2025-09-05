@@ -36,13 +36,10 @@
 .diceui-btn {
   appearance: none;
   border: none;
-  border-radius: 2px;
+  border-radius: var(--radii-50);
   padding: 8px 8px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.04),
-    0 1px 2px rgba(0, 0, 0, 0.08);
 }
 .diceui-btn--primary {
   background: chocolate;
@@ -64,11 +61,42 @@
   background: #eef1f4;
 }
 
+/* diceui-btn diceui-chip */
+.miro-btn {
+  border-radius: var(--radii-50);
+  border-width: var(--border-widths-sm);
+  border-color: #e0e2e8;
+  border-style: solid;
+  box-sizing: border-box;
+  height: 35px;
+  flex: 0 0 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--colors-background-neutrals);
+  font-size: 14px;
+}
+
+.miro-btn:hover {
+  background: #eef1f4;
+  cursor: pointer;
+}
+
+.miro-btn--primary {
+  background: #e9d5ff;
+  color: #6c5589;
+  font-weight: bold;
+  border-color: #c7b4ff;
+}
+
+.miro-btn--primary:hover {
+  background: #e0c4ff;
+}
+
 /* Command bar */
 .diceui-command {
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 8px;
+  gap: 5px;
   align-items: center;
   margin-top: 12px;
 }
@@ -77,39 +105,32 @@
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #d0d7de;
-  border-radius: 2px;
+  border-radius: var(--radii-50);
   font-size: 14px;
   outline: none;
+  height: 35px;
 }
 .diceui-input:focus {
   border-color: #218bff;
-  box-shadow: 0 0 0 3px rgba(33, 139, 255, 0.15);
 }
 
 .diceui-action {
   appearance: none;
-  border: none;
-  border-radius: 2px;
+  border-radius: var(--radii-50);
   padding: 8px 12px;
-  font-weight: 700;
   cursor: pointer;
-  background: #1f883d;
+  background: #68bd74;
   color: #fff;
-  box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.04),
-    0 1px 2px rgba(0, 0, 0, 0.08);
 }
 .diceui-action:hover {
-  filter: brightness(1.03);
+  background: #5ca165;
 }
-.diceui-action:active {
-  transform: translateY(1px);
-}
-
 .diceui-action--ghost {
+  background: #fff;
+  color: #374151;
+}
+.diceui-action--ghost:hover {
   background: #f6f8fa;
-  color: #24292f;
-  border: 1px solid #d0d7de;
 }
 
 /* History popover */
@@ -125,7 +146,7 @@
   overflow: auto;
   background: #fff;
   border: 1px solid #d0d7de;
-  border-radius: 2px;
+  border-radius: var(--radii-50);
   box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
   z-index: 50;
 }
@@ -146,7 +167,7 @@
   color: #0969da;
   cursor: pointer;
   padding: 4px 6px;
-  border-radius: 2px;
+  border-radius: var(--radii-50);
 }
 .diceui-link:hover {
   background: #eef6ff;
@@ -168,7 +189,7 @@
   width: 100%;
   text-align: left;
   padding: 8px 10px;
-  border-radius: 2px;
+  border-radius: var(--radii-50);
   border: 1px solid transparent;
   background: transparent;
   cursor: pointer;
